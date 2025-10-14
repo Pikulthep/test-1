@@ -1,0 +1,37 @@
+{
+  "name": "TV Digital ทีวีดิจิตอล",
+  "author": "FREETV",
+  "image": "https://images.droidsans.com/wp-content/uploads/2014/04/doodee-sticker.png",
+  "url": "",
+  "stations": [
+
+    {
+      "name": "3HD",
+      "image": "https://ball67.com/assets/channels-logo/ch3.png",
+      "url": "https://ball67.com/channels/3hd/|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+      "info": "ต้องมี Referer ball67",
+      "playInNatPlayer": true
+    },
+    {
+      "name": "5HD",
+      "image": "https://ball67.com/assets/channels-logo/ch5.png",
+      "url": "https://ball67.com/channels/5hd/|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+      "info": "ต้องมี Referer ball67",
+      "playInNatPlayer": true
+    },
+    {
+      "name": "7HD",
+      "image": "https://ball67.com/assets/channels-logo/ch7.png",
+      "url": "https://ball67.com/channels/7hd/|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+      "info": "ต้องมี Referer ball67",
+      "playInNatPlayer": true
+    },
+    {
+      "name": "Thai Parliament (TPTV)",
+      "image": "https://i.imgur.com/Jrqo8JP.png",
+      "url": "https://cdn-live.parliament.go.th/live/tptv/playlist.m3u8",
+      "info": "ถ้ามี",
+      "playInNatPlayer": true
+    }
+  ]
+}
