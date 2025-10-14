@@ -1,40 +1,34 @@
-  {
- "name": "PinkTV",
- "author": "ชมฟรี! ไม่คิดตังค์",
- "info": "ไม่ต้องแจ้ง!!ไม่แก้ ลิงก์ดับเลิกดู",
- "image": "https://images.droidsans.com/wp-content/uploads/2014/04/doodee-sticker.png",
- "url": "https://bit.ly/PinkTV",
- "groups": [
-
-
-
 {
-   "name": "ช่องฟรีทีวี",
-   "image": "https://image.makewebcdn.com/makeweb/m_1920x0/nhdwvndC0/MEDIAINSIGHT/ทีวีดิจิทัล.jpg",
-   "stations": [
-
+  "name": "PinkTV",
+  "author": "ชมฟรี! ไม่คิดตังค์",
+  "info": "ไม่ต้องแจ้ง!!ไม่แก้ ลิงก์ดับเลิกดู",
+  "image": "https://images.droidsans.com/wp-content/uploads/2014/04/doodee-sticker.png",
+  "url": "https://bit.ly/PinkTV",
+  "groups": [
     {
-     "name": "ช่อง 3 HD",
-     "image": "https://ball67.com/assets/channels-logo/ch5.png",
-     "url": "https://ball67.com/channels/3hd",
-     "referer": "https://ball67.com/",
-     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
-    },
-    {
-     "name": "ช่อง 5 HD",
-     "image": "https://dookeela.live/uploads/1664574997.png",
-     "url": "https://ball67.com/channels/5hd",
-     "referer": "https://ball67.com/",
-     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
-    },
-    {
-     "name": "ช่อง 7 HD",
-     "image": "https://dookeela.live/uploads/1688059473.png",
-     "url": "https://dookeela.live/live-tv/ch7hd",
-     "referer": "https://dookeela.live/",
-     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+      "name": "ช่องฟรีทีวี",
+      "image": "https://image.makewebcdn.com/makeweb/m_1920x0/nhdwvndC0/MEDIAINSIGHT/%E0%B8%97%E0%B8%B5%E0%B8%A7%E0%B8%B5%E0%B8%94%E0%B8%B4%E0%B8%88%E0%B8%B4%E0%B8%97%E0%B8%B1%E0%B8%A5.jpg",
+      "stations": [
+        {
+          "name": "ช่อง 3 HD (src1)",
+          "image": "https://ball67.com/assets/channels-logo/ch3.png",
+          "url": "https://ball67.com/channels/3hd|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+          "info": "สตรีมตรง + เฮดเดอร์"
+        },
+        {
+          "name": "ช่อง 5 HD (src1)",
+          "image": "https://dookeela.live/uploads/1664574997.png",
+          "url": "https://ball67.com/channels/5hd|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+          "info": "สตรีมตรง + เฮดเดอร์"
+        },
+        {
+          "name": "ช่อง 7 HD (src1)",
+          "image": "https://dookeela.live/uploads/1688059473.png",
+          "url": "https://ball67.com/channels/7hd|Referer=https://dookeela.live/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
+          "info": "สตรีมตรง + เฮดเดอร์"
         }
       ]
     }
   ]
 }
+
