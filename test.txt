@@ -19,14 +19,14 @@
      "name": "3HD",
      "image": "https://ball67.com/assets/channels-logo/ch3.png",
      "url": "https://ball67.com/channels/3hd",
-     "referer": "https://ball67.com",
+     "referer": "",
      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
     },
     {
-     "name": "Thai PBS HD",
+     "name": "5HD",
      "image": "https://ball67.com/assets/channels-logo/ch5.png",
      "url": "https://ball67.com/channels/5hd",
-     "referer": "https://ball67.com",
+     "referer": "",
      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
     },
     {
