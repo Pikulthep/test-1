@@ -1,34 +1,189 @@
-{
-  "name": "PinkTV",
-  "author": "ชมฟรี! ไม่คิดตังค์",
-  "info": "ไม่ต้องแจ้ง!!ไม่แก้ ลิงก์ดับเลิกดู",
-  "image": "https://images.droidsans.com/wp-content/uploads/2014/04/doodee-sticker.png",
-  "url": "https://bit.ly/PinkTV",
-  "groups": [
-    {
-      "name": "ช่องฟรีทีวี",
-      "image": "https://image.makewebcdn.com/makeweb/m_1920x0/nhdwvndC0/MEDIAINSIGHT/%E0%B8%97%E0%B8%B5%E0%B8%A7%E0%B8%B5%E0%B8%94%E0%B8%B4%E0%B8%88%E0%B8%B4%E0%B8%97%E0%B8%B1%E0%B8%A5.jpg",
-      "stations": [
-        {
-          "name": "ช่อง 3 HD (src1)",
-          "image": "https://ball67.com/assets/channels-logo/ch3.png",
-          "url": "https://ball67.com/channels/3hd|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
-          "info": "สตรีมตรง + เฮดเดอร์"
-        },
-        {
-          "name": "ช่อง 5 HD (src1)",
-          "image": "https://dookeela.live/uploads/1664574997.png",
-          "url": "https://ball67.com/channels/5hd|Referer=https://ball67.com/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
-          "info": "สตรีมตรง + เฮดเดอร์"
-        },
-        {
-          "name": "ช่อง 7 HD (src1)",
-          "image": "https://dookeela.live/uploads/1688059473.png",
-          "url": "https://ball67.com/channels/7hd|Referer=https://dookeela.live/&User-Agent=ExoPlayerLib/2.19 (Linux;Android)",
-          "info": "สตรีมตรง + เฮดเดอร์"
-        }
-      ]
-    }
-  ]
-}
+  {
+ "name": "   FREETV   ",
+ "author": "ช่องดับไม่ต้องถามหา ของฟรี อย่าเรื่องมาก!",
+ "info": "ดูดมาทั้งนั้น ทำเองไม่เป็น!",
+ "image": "https://media.istockphoto.com/id/1492909619/photo/3d-render-pink-vintage-television-cartoon-style-isolate-on-white-background-minimal-retro-tv.jpg?s=612x612&w=0&k=20&c=EuEmQobaWLYSWCkcVBSXtSPLGDgxtzjU-kL2L8bvRZ0=",
+ "url": "",
+ "groups": [
 
+
+
+
+{
+   "name": "ช่องดูทีวี",
+   "image": "https://drive.google.com/uc?id=1T49TCU-3mofFrmVmLfjaOFOm53OAJD0K",
+   "stations": [
+
+
+    {
+     "name": "3HD",
+     "image": "https://ball67.com/assets/channels-logo/ch3.png",
+     "url": "https://ball67.com/channels/3hd",
+     "referer": "https://ball67.com",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Thai PBS HD",
+     "image": "https://ball67.com/assets/channels-logo/ch5.png",
+     "url": "https://ball67.com/channels/5hd",
+     "referer": "https://ball67.com",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "7HD",
+     "image": "https://dookeela2.live/uploads/1725896083.png",
+     "url": "https://ball67.com/channels/7hd",
+     "referer": "",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+
+    
+    },
+
+
+
+ ]
+  },
+
+
+
+
+
+
+
+{
+   "name": "ช่องสำหรับเด็ก",
+   "image": "https://drive.google.com/uc?id=1W-lK_U_48dSsKc_WuLjBHKIiS_7NWv-G",
+   "stations": [
+
+    {
+     "name": "Animax | Singapore",
+     "image": "https://dookeela2.live/uploads/1704038567.png",
+     "url": "https://dookeela2.live/live-tv/animax",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Astro Ceria",
+     "image": "https://dookeela2.live/uploads/1721687988.png",
+     "url": "https://dookeela2.live/live-tv/astroceria",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Boomerang",
+     "image": "https://dookeela2.live/uploads/1705504202.png",
+     "url": "https://dookeela2.live/live-tv/boomerang",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Cartoon Club HD",
+     "image": "https://dookeela2.live/uploads/1705504043.png",
+     "url": "https://dookeela2.live/live-tv/cartoonclub",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Cartoon Network",
+     "image": "https://dookeela2.live/uploads/1708344243.png",
+     "url": "https://dookeela2.live/live-tv/cartoon-network",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "cartoonito",
+     "image": "https://dookeela2.live/uploads/1704039063.png",
+     "url": "https://dookeela2.live/live-tv/cartoonito",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "CBeebies",
+     "image": "https://dookeela2.live/uploads/1709573298.png",
+     "url": "https://dookeela2.live/live-tv/cbeebies",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Disney Channel",
+     "image": "https://dookeela2.live/uploads/1716361978.png",
+     "url": "https://dookeela2.live/live-tv/disney-channel",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Disney Junior",
+     "image": "https://dookeela2.live/uploads/1716362497.png",
+     "url": "https://dookeela2.live/live-tv/disney-junior",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Disney XD",
+     "image": "https://dookeela2.live/uploads/1716362753.png",
+     "url": "https://dookeela2.live/live-tv/disneyxd",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "DreamWorks",
+     "image": "https://dookeela2.live/uploads/1723200736.png",
+     "url": "https://dookeela2.live/live-tv/dreamworks",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "FWTOON",
+     "image": "https://drive.google.com/uc?id=1dT1Mj4V4tXE3QxgrKnqD6hTrR3OyfUoe",
+     "url": "https://inwiptv.org/player_demo.php?channel=89780",
+     "referer": "",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Moonbug",
+     "image": "https://dookeela2.live/uploads/1721687729.png",
+     "url": "https://dookeela2.live/live-tv/moonbug",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Nick Jr.",
+     "image": "https://dookeela2.live/uploads/1708344362.png",
+     "url": "https://dookeela2.live/live-tv/nickjr",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "Nickelodeon",
+     "image": "https://dookeela2.live/uploads/1708344306.png",
+     "url": "https://dookeela2.live/live-tv/nickelodeon",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "nicktoons | Germany",
+     "image": "https://dookeela2.live/uploads/1713282303.png",
+     "url": "https://dookeela2.live/live-tv/nicktoons",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "PBS KIDS",
+     "image": "https://dookeela2.live/uploads/1730064747.png",
+     "url": "https://dookeela2.live/live-tv/pbskids",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+    },
+    {
+     "name": "True Spark Play",
+     "image": "https://dookeela2.live/uploads/1720723541.png",
+     "url": "https://dookeela2.live/live-tv/truesparkplay",
+     "referer": "https://dookeela2.live/",
+     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+
+},
+
+  ]
+  },
+ ]
+}
