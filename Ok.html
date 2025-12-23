@@ -1,0 +1,10 @@
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video" controls></video>
+<script>
+  if (Hls.isSupported()) {
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    hls.loadSource('https://master.steamhls88.com/hlsr2/fd7d12247b53bc5b93b8a1e21ae6ceb6/master.m3u8');
+    hls.attachMedia(video);
+  }
+</script>
