@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nhận link đăng nhập Netflix</title>
+    <link rel="stylesheet" href="https://netflix.lunakey.net/assets/style.css">
+</head>
+<body class="user-bg">
+    <div class="user-wrap">
+        <div class="user-card">
+            <div class="logo">N</div>
+            <h1>Nhập mã định danh</h1>
+            <p class="muted">Dán mã quản trị viên gửi cho bạn để nhận link đăng nhập Netflix (PC + Mobile).</p>
+            <!-- เปลี่ยน action เป็น /redeem เพื่อเชื่อมกับ Cloudflare Functions -->
+            <form method="post" action="/redeem" autocomplete="off">
+                <input class="big-code" name="code" required placeholder="VD: AB12CDEF" autofocus pattern="[A-Za-z0-9_-]{4,32}" maxlength="32">
+                <button class="btn primary big" type="submit">Lấy link đăng nhập</button>
+            </form>
+            <p class="muted small">Nếu key hiện tại không còn dùng được, hệ thống sẽ tự thay bằng key khác.</p>
+        </div>
+    </div>
+</body>
+</html>
