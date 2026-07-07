@@ -1,7 +1,11 @@
-export async function onRequestPost(context) {
-  const request = context.request;
-  const formData = await request.formData();
-  const code = formData.get('code');
+export default function handler(req, res) {
+  // อนุญาตเฉพาะการส่งข้อมูลแบบ POST จากฟอร์มเท่านั้น
+  if (req.method !== 'POST') {
+    return res.status(405).send('Method Not Allowed');
+  }
+
+  // ดึงค่ารหัสที่ผู้ใช้กรอกเข้ามา (Vercel จะแปลงข้อมูลให้อัตโนมัติใน req.body)
+  const code = req.body.code;
 
   // ตรวจสอบรหัสผ่าน
   if (code === "LXSCXJZWC3") {
@@ -12,7 +16,6 @@ export async function onRequestPost(context) {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width,initial-scale=1">
             <title>ผลลัพธ์การตรวจสอบ</title>
-            <!-- ดึง CSS จากไฟล์ของคุณเอง -->
             <link rel="stylesheet" href="/assets/style.css">
         </head>
         <body class="user-bg">
@@ -71,9 +74,9 @@ export async function onRequestPost(context) {
     </html>
     `;
 
-    return new Response(successHTML, {
-      headers: { "Content-Type": "text/html; charset=utf-8" }
-    });
+    // ส่งหน้าผลลัพธ์กลับไปให้ผู้ใช้
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.status(200).send(successHTML);
   } 
   
   // กรณีที่กรอกรหัสผิด
@@ -85,7 +88,6 @@ export async function onRequestPost(context) {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width,initial-scale=1">
             <title>เกิดข้อผิดพลาด</title>
-            <!-- ดึง CSS จากไฟล์ของคุณเอง -->
             <link rel="stylesheet" href="/assets/style.css">
         </head>
         <body class="user-bg">
@@ -102,9 +104,7 @@ export async function onRequestPost(context) {
     </html>
     `;
 
-    return new Response(errorHTML, {
-      status: 400,
-      headers: { "Content-Type": "text/html; charset=utf-8" }
-    });
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.status(400).send(errorHTML);
   }
 }
