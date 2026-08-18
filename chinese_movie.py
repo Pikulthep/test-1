@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import json
 import os
 import time
@@ -22,29 +26,54 @@ CATEGORIES = [
 
 SAVE_DIR = "output"
 OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
-MAX_WORKERS = 10 # จำนวน Thread ที่จะใช้วิ่งมุดเจาะพร้อมๆ กัน (เร็วสะใจแน่นอน)
+
+# 🌟 ปรับกลับมาใช้ 3 เพื่อไม่ให้ RAM ของ GitHub ระเบิด (เพราะ Selenium กินสเปค)
+MAX_WORKERS = 3 
+
+# ================== ฟังก์ชันช่วยเหลือ ==================
+def get_driver():
+    """ฟังก์ชันเปิดเบราว์เซอร์ล่องหน (ผ่านด่าน Cloudflare)"""
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--mute-audio")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    
+    # ปิดโหลดรูป/CSS ให้ทำงานไวขึ้น
+    prefs = {
+        "profile.managed_default_content_settings.images": 2,
+        "profile.managed_default_content_settings.stylesheets": 2
+    }
+    options.add_experimental_option("prefs", prefs)
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.set_page_load_timeout(45)
+    return driver
 
 # ================== ฟังก์ชันดึงข้อมูล ==================
 def get_movie_video_link(movie_info):
-    """ฟังก์ชันมุดเข้าไปในหน้าหนังแต่ละเรื่อง เพื่อดึงลิงก์ .m3u8 ออกมา"""
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Referer': f"{DOMAIN}/categories.php"
-    }
-    
+    """มุดเข้าหน้าหนังเพื่อเจาะลิงก์ .m3u8"""
+    driver = get_driver()
     try:
-        res = requests.get(movie_info['url'], headers=headers, timeout=15)
-        soup = BeautifulSoup(res.text, 'html.parser')
+        driver.get(movie_info['url'])
+        time.sleep(3) # รอให้หน้าเว็บและข้อมูลวิดีโอโหลดเสร็จ
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
         
         m3u8_link = None
         
-        # วิธีเจาะที่ 1: ดึงจากปุ่มเล่นวิดีโอ (id="posterPlayer")
+        # เจาะเอาลิงก์จากปุ่มเล่นวิดีโอ (ตามโค้ด HTML ของเว็บ)
         play_btn = soup.find('button', id='posterPlayer')
         if play_btn and play_btn.has_attr('data-video-url'):
             m3u8_link = play_btn['data-video-url']
             
-        # วิธีเจาะที่ 2: ดึงจาก JSON-LD (เผื่อวิธีแรกเว็บเปลี่ยนโค้ด)
+        # ถ้าวิธีแรกพลาด ให้ลองดึงจาก Script Data
         if not m3u8_link:
             scripts = soup.find_all('script', type='application/ld+json')
             for script in scripts:
@@ -54,7 +83,6 @@ def get_movie_video_link(movie_info):
                         m3u8_link = match.group(1)
                         break
 
-        # จัดแพ็กเกจข้อมูลส่งกลับไป
         if m3u8_link:
             print(f"    ✅ เจาะลิงก์วิดีโอสำเร็จ: {movie_info['name']}")
             return {
@@ -64,89 +92,83 @@ def get_movie_video_link(movie_info):
                 "info": "หนังสั้นจีน"
             }
         else:
-            print(f"    ❌ ไม่พบลิงก์วิดีโอในหน้า: {movie_info['name']}")
+            print(f"    ❌ ไม่พบลิงก์วิดีโอ: {movie_info['name']}")
             return None
             
     except Exception as e:
-        print(f"    ⚠️ Error ขณะเจาะไฟล์วิดีโอ {movie_info['name']}: {e}")
+        print(f"    ⚠️ Error ขณะเจาะไฟล์: {movie_info['name']} ({str(e).split(chr(10))[0]})")
         return None
+    finally:
+        driver.quit()
 
 def get_movies_from_category(cat_name, cat_id, max_page):
+    """กวาดหน้าหมวดหมู่หลัก"""
     movie_links_data = []
-    # เพิ่ม Header พรางตัวให้เนียนขึ้น ป้องกันเว็บส่งข้อมูลเปล่ามาให้
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
-    }
+    driver = get_driver()
     
-    api_url = f"{DOMAIN}/load_more_movies.php"
-    
-    for page in range(1, max_page + 1):
-        print(f"  -> กำลังดึงหน้ารวม {page}/{max_page} ...")
-        try:
-            if page == 1:
-                url = f"{DOMAIN}/categories.php?id={cat_id}"
-                res = requests.get(url, headers=headers, timeout=10)
-                html_data = res.text
-            else:
-                payload = {'action': 'load_more_movies', 'page': page, 'category_id': cat_id}
-                headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-                headers['X-Requested-With'] = 'XMLHttpRequest'
-                res = requests.post(api_url, data=payload, headers=headers, timeout=10)
-                html_data = res.text
+    try:
+        print(f"  -> กำลังเปิดหน้าหมวดหมู่เพื่อหลบระบบป้องกัน...")
+        driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
+        time.sleep(5) # ให้เวลาเจาะกำแพง Cloudflare
+        
+        # 🌟 จำลองการเลื่อนจอลงข้างล่างเพื่อโหลดหนังหน้าถัดไป (Infinite Scroll)
+        for page in range(1, max_page):
+            print(f"     เลื่อนจอโหลดข้อมูลหน้า {page + 1}/{max_page} ...")
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(4) 
+            
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        cards = soup.find_all('div', class_='movie-card')
+        
+        if not cards:
+            print("     [ไม่พบการ์ดหนัง] เว็บอาจจะบล็อก หรือไม่มีข้อมูล")
+            
+        for card in cards:
+            a_tag = card.find('a')
+            img_tag = card.find('img')
+            
+            if a_tag and img_tag:
+                href = a_tag.get('href', '')
+                full_link = f"{DOMAIN}/{href.lstrip('/')}" if not href.startswith('http') else href
                 
-            soup = BeautifulSoup(html_data, 'html.parser')
-            cards = soup.find_all('div', class_='movie-card')
-            
-            if not cards:
-                print("     [ไม่พบการ์ดหนัง] อาจจะหมดหน้า หรือถูกระบบป้องกันบล็อก")
-                break
-            
-            for card in cards:
-                a_tag = card.find('a')
-                img_tag = card.find('img')
+                src = img_tag.get('src', '')
+                full_img = f"{DOMAIN}/{src.lstrip('/')}" if not src.startswith('http') else src
                 
-                if a_tag and img_tag:
-                    href = a_tag.get('href', '')
-                    # แก้ปัญหา slash ซ้อน (//) ด้วยการใช้ lstrip
-                    full_link = f"{DOMAIN}/{href.lstrip('/')}" if not href.startswith('http') else href
-                    
-                    src = img_tag.get('src', '')
-                    full_img = f"{DOMAIN}/{src.lstrip('/')}" if not src.startswith('http') else src
-                    
-                    title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
-                    
-                    # เก็บลิงก์หน้าเว็บไว้ก่อน เพื่อเอาไปเจาะต่อ
-                    movie_links_data.append({
-                        "name": title,
-                        "image": full_img,
-                        "url": full_link
-                    })
-                    
-        except Exception as e:
-            print(f"     [Error] ดึงหน้ารวมล้มเหลว: {e}")
-            
-    # ตัดข้อมูลที่ซ้ำกัน
+                title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
+                
+                movie_links_data.append({
+                    "name": title,
+                    "image": full_img,
+                    "url": full_link
+                })
+                
+    except Exception as e:
+        print(f"     [Error] ดึงหน้ารวมล้มเหลว: {e}")
+    finally:
+        driver.quit()
+        
+    # ตัดลิงก์ซ้ำ
     unique_links = {v['url']: v for v in movie_links_data}.values()
     unique_links_list = list(unique_links)
     
-    if unique_links_list:
-        print(f"  🎯 พบลิงก์ทั้งหมด {len(unique_links_list)} เรื่อง กำลังเปิดระบบ Multithreading มุดไปเจาะไฟล์วิดีโอ...")
-    
-    # 🌟 วิ่งมุดเจาะเอาลิงก์วิดีโอ .m3u8 พร้อมๆ กัน
     final_movies = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        results = executor.map(get_movie_video_link, unique_links_list)
-        for res in results:
-            if res:
-                final_movies.append(res)
-                
+    if unique_links_list:
+        print(f"  🎯 พบลิงก์ทั้งหมด {len(unique_links_list)} เรื่อง")
+        print(f"  ⏳ เริ่มมุดเจาะดึงข้อมูลวิดีโอ (รันขนาน {MAX_WORKERS} หน้าต่าง)...")
+        
+        # วิ่งเจาะไฟล์วิดีโอทีละ 3 หน้าต่าง
+        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            results = executor.map(get_movie_video_link, unique_links_list)
+            for res in results:
+                if res:
+                    final_movies.append(res)
+                    
     return final_movies
 
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลและเจาะไฟล์เว็บหนังสั้นจีน (เวอร์ชัน Deep Dive)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลและเจาะไฟล์เว็บหนังสั้นจีน (เวอร์ชัน Selenium Stealth)\n")
     
     all_groups_data = []
     
