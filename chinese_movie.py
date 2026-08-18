@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import json
 import os
 import time
@@ -8,7 +12,7 @@ from datetime import datetime
 # ================== CONFIG ==================
 DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
 
-# 🌟 จัดเต็มทุกหมวดหมู่ ครอบคลุมหนังทั้งหมดกว่า 1,800 เรื่อง
+# 🌟 จัดเต็มทุกหมวดหมู่
 CATEGORIES = [
     {"name": "ข้ามมิติ", "id": "16", "max_page": 3},
     {"name": "ครอบครัว", "id": "1", "max_page": 2},
@@ -30,71 +34,85 @@ CATEGORIES = [
 SAVE_DIR = "output"
 OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
+# ================== ฟังก์ชันช่วยเหลือ ==================
+def get_driver():
+    """ฟังก์ชันเปิดเบราว์เซอร์ล่องหน เพื่อหลบ Cloudflare"""
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    
+    # ปิดโหลดรูปเพื่อความไว
+    prefs = {"profile.managed_default_content_settings.images": 2, "profile.managed_default_content_settings.stylesheets": 2}
+    options.add_experimental_option("prefs", prefs)
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.set_page_load_timeout(45)
+    return driver
+
 # ================== ฟังก์ชันดึงข้อมูล ==================
 def get_movies_from_category(cat_name, cat_id, max_page):
     movies = []
-    api_url = f"{DOMAIN}/load_more_movies.php"
+    driver = get_driver()
     
-    for page in range(1, max_page + 1):
-        print(f"  -> กำลังดึงหน้า {page}/{max_page} ...")
-        try:
-            if page == 1:
-                # ดึงหน้าแรก
-                url = f"{DOMAIN}/categories.php?id={cat_id}"
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    try:
+        print(f"  -> กำลังเปิดหน้าหมวดหมู่เพื่อหลบระบบป้องกัน (Cloudflare)...")
+        driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
+        time.sleep(6) # ให้เวลาเจาะกำแพง
+        
+        # เลื่อนจอลงด้านล่างเพื่อให้เว็บโหลดหนังเพิ่ม (Infinite Scroll)
+        for page in range(1, max_page):
+            print(f"     เลื่อนจอโหลดข้อมูลหน้า {page + 1}/{max_page} ...")
+            driver.execute_script("""
+                var sentinel = document.getElementById('movie-sentinel');
+                if(sentinel) {
+                    sentinel.scrollIntoView();
+                } else {
+                    window.scrollTo(0, document.body.scrollHeight);
                 }
-                res = requests.get(url, headers=headers, timeout=15)
-                html_data = res.text
-            else:
-                # ดึงหน้าถัดๆ ไป ผ่าน API ด้วยคำสั่ง POST แบบเนียนๆ
-                payload = {'action': 'load_more_movies', 'page': page, 'category_id': cat_id}
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-                res = requests.post(api_url, data=payload, headers=headers, timeout=15)
-                html_data = res.text
-                
-            soup = BeautifulSoup(html_data, 'html.parser')
-            cards = soup.find_all('div', class_='movie-card')
+            """)
+            time.sleep(4) # รอให้การ์ดหนังหน้าใหม่เด้งขึ้นมา
             
-            if not cards:
-                print("     [หมดหน้า] ไม่มีหนังเพิ่มเติมแล้ว")
-                break
-                
-            for card in cards:
-                a_tag = card.find('a')
-                img_tag = card.find('img')
-                
-                if a_tag and img_tag:
-                    # จัดการลิงก์และรูปภาพ
-                    href = a_tag.get('href', '')
-                    full_link = f"{DOMAIN}/{href.lstrip('/')}" if not href.startswith('http') else href
-                    
-                    src = img_tag.get('src', '')
-                    full_img = f"{DOMAIN}/{src.lstrip('/')}" if not src.startswith('http') else src
-                    
-                    title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
-                    
-                    # ตรวจสอบว่าหมวดซับไทย หรือ พากย์ไทย
-                    info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
-                    
-                    # 🌟 โครงสร้าง JSON ตามที่ผู้ใช้ต้องการเป๊ะๆ
-                    movies.append({
-                        "name": title,
-                        "url": full_link,
-                        "image": full_img,
-                        "referer": DOMAIN,
-                        "info": info_text,
-                        "playInNatPlayer": "true"
-                    })
-                    
-        except Exception as e:
-            print(f"     [Error] ดึงข้อมูลล้มเหลว: {e}")
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        cards = soup.find_all('div', class_='movie-card')
+        
+        if not cards:
+            print("     [ไม่พบการ์ดหนัง] เว็บอาจจะบล็อก หรือไม่มีข้อมูล")
             
-    # ลบข้อมูลหนังที่ซ้ำกัน (ป้องกันเว็บส่งข้อมูลหน้าซ้อนกัน)
+        for card in cards:
+            a_tag = card.find('a')
+            img_tag = card.find('img')
+            
+            if a_tag and img_tag:
+                href = a_tag.get('href', '')
+                full_link = f"{DOMAIN}/{href.lstrip('/')}" if not href.startswith('http') else href
+                
+                src = img_tag.get('src', '')
+                full_img = f"{DOMAIN}/{src.lstrip('/')}" if not src.startswith('http') else src
+                
+                title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
+                info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
+                
+                # โครงสร้าง JSON ของ NatPlayer
+                movies.append({
+                    "name": title,
+                    "url": full_link,
+                    "image": full_img,
+                    "referer": DOMAIN,
+                    "info": info_text,
+                    "playInNatPlayer": "true"
+                })
+                
+    except Exception as e:
+        print(f"     [Error] ดึงข้อมูลล้มเหลว: {e}")
+    finally:
+        driver.quit()
+        
+    # ลบข้อมูลหนังที่ซ้ำกัน
     unique_movies = []
     seen = set()
     for m in movies:
@@ -107,7 +125,7 @@ def get_movies_from_category(cat_name, cat_id, max_page):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน NatPlayer Fast Scrape)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Selenium Stealth + NatPlayer)\n")
     
     all_groups_data = []
     
@@ -143,4 +161,4 @@ if __name__ == "__main__":
         json.dump(final_data, f, ensure_ascii=False, indent=2)
         
     elapsed = time.time() - start_time
-    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed:.2f} วินาที!")
+    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed / 60:.2f} นาที!")
