@@ -295,7 +295,7 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "พ่อ อย่าไปเล่นแล้ว",
+          "name": "พ่ออย่าไปเล่นแล้ว",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1932",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/583e411ef7be6c63cf4c58197904eb00.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
