@@ -1,9 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import json
 import os
 import time
@@ -12,7 +8,6 @@ from datetime import datetime
 # ================== CONFIG ==================
 DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
 
-# 🌟 ไม่ต้องพึ่ง max_page อีกต่อไป! บอทจะเลื่อนกวาดจนกว่าจะสุดหน้าเว็บเอง
 CATEGORIES = [
     {"name": "ข้ามมิติ", "id": "16"},
     {"name": "ครอบครัว", "id": "1"},
@@ -34,30 +29,7 @@ CATEGORIES = [
 SAVE_DIR = "output"
 OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
-# ================== ฟังก์ชันช่วยเหลือ ==================
-def get_driver():
-    """เปิดเบราว์เซอร์ล่องหน เพื่อหลบ Cloudflare"""
-    options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    
-    prefs = {
-        "profile.managed_default_content_settings.images": 2, 
-        "profile.managed_default_content_settings.stylesheets": 2
-    }
-    options.add_experimental_option("prefs", prefs)
-
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
-    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-    driver.set_page_load_timeout(45)
-    return driver
-
 def format_url(url_path):
-    """ฟังก์ชันจัดการลิงก์ให้สมบูรณ์ ป้องกันบั๊กลิงก์เสีย"""
     if not url_path:
         return ""
     if url_path.startswith('http'):
@@ -70,54 +42,61 @@ def format_url(url_path):
 # ================== ฟังก์ชันดึงข้อมูล ==================
 def get_movies_from_category(cat_name, cat_id):
     movies = []
-    driver = get_driver()
+    
+    # 🌟 สร้าง Session เพื่อเก็บคุกกี้ ป้องกันการโดนเตะ
+    session = requests.Session()
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Referer': f"{DOMAIN}/categories.php?id={cat_id}"
+    }
     
     try:
-        print(f"  -> กำลังเปิดหน้าหมวดหมู่ {cat_name}...")
-        driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
-        time.sleep(6) # ให้เวลาเจาะกำแพง Cloudflare
+        # ดึงหน้าแรก (หน้าที่ 1) เพื่อเอาคุกกี้และข้อมูลชุดแรก 30 เรื่อง
+        print(f"  -> ดึงหน้า 1...")
+        res = session.get(f"{DOMAIN}/categories.php?id={cat_id}", headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        cards = soup.find_all('div', class_='movie-card')
         
-        last_count = 0
-        retry = 0
-        
-        # 🌟 ระบบเลื่อนจอแบบ Smart Scroll (ฉลาดและทนทานขึ้น)
-        for _ in range(60): # ลูปสูงสุดเผื่อไว้ 60 ครั้ง (รองรับหนัง 1,800+ เรื่อง)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(3)
+        # 🌟 ลูปยิง API ขอหน้า 2, 3, 4 ไปเรื่อยๆ จนกว่ามันจะส่งเนื้อหาเปล่ามาให้
+        page = 2
+        while True:
+            print(f"  -> ดึงหน้า {page}...")
+            api_url = f"{DOMAIN}/load_more_movies.php"
+            payload = {'action': 'load_more_movies', 'page': page, 'category_id': cat_id}
             
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            # ยิง POST ตามแบบฉบับที่หน้าเว็บมันเขียนเป๊ะๆ
+            post_headers = headers.copy()
+            post_headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+            post_headers['X-Requested-With'] = 'XMLHttpRequest'
             
-            # 1. เช็คว่าเจอข้อความ "ไม่มีหนังเพิ่มเติมแล้ว" (id="movie-end") หรือยัง
-            end_element = soup.find('div', id='movie-end')
-            if end_element and 'hidden' not in end_element.get('class', []):
-                print("     ✅ ดึงข้อมูลจนสุดหน้าเว็บแล้ว")
+            api_res = session.post(api_url, data=payload, headers=post_headers, timeout=10)
+            html_data = api_res.text
+            
+            # ถ้า API ส่งค่าว่างมา แปลว่าหนังหมดหมวดแล้ว
+            if not html_data.strip():
+                print("     ✅ หมดแล้ว! ไม่มีหนังเพิ่มเติม")
                 break
                 
-            # 2. เช็คจำนวนการ์ดหนังว่าเพิ่มขึ้นไหม
-            current_count = len(soup.find_all('div', class_='movie-card'))
-            if current_count > last_count:
-                print(f"     ⏳ กำลังโหลด... กวาดมาได้แล้ว {current_count} เรื่อง")
-                last_count = current_count
-                retry = 0
-            else:
-                retry += 1
-                # ทริก: ขยับจอขึ้นลงนิดหน่อย เพื่อกระตุ้นระบบโหลดของเว็บ
-                driver.execute_script("window.scrollBy(0, -800);")
-                time.sleep(1)
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(2)
+            api_soup = BeautifulSoup(html_data, 'html.parser')
+            new_cards = api_soup.find_all('div', class_='movie-card')
+            
+            if not new_cards:
+                print("     ✅ หมดแล้ว! ไม่พบการ์ดหนัง")
+                break
                 
-                if retry >= 4:
-                    print("     ⚠️ โหลดหน้าเว็บเพิ่มไม่ได้แล้ว (อาจจะสุดหน้าจริงๆ)")
-                    break
+            # เอาการ์ดหนังหน้าใหม่ไปรวมกับของเก่า
+            cards.extend(new_cards)
             
-        # กวาดข้อมูลจากโครงสร้างที่ดึงได้ทั้งหมด
-        final_soup = BeautifulSoup(driver.page_source, 'html.parser')
-        cards = final_soup.find_all('div', class_='movie-card')
-        
-        if not cards:
-            print("     [ไม่พบการ์ดหนัง] เว็บอาจจะบล็อก หรือไม่มีข้อมูล")
+            # เช็คว่าถ้าหน้าสุดท้ายมันดึงมาไม่ถึง 30 เรื่อง แปลว่าหมดพอดี ไม่ต้องขอหน้าถัดไปแล้ว
+            if len(new_cards) < 30:
+                print("     ✅ หมดแล้ว! ถึงหน้าสุดท้ายพอดี")
+                break
+                
+            page += 1
+            time.sleep(1) # พักหายใจ 1 วิ ป้องกันโดนแบน
             
+        # ================== แกะข้อมูลใส่แพ็กเกจ JSON ==================
         for card in cards:
             a_tag = card.find('a')
             img_tag = card.find('img')
@@ -125,11 +104,9 @@ def get_movies_from_category(cat_name, cat_id):
             if a_tag and img_tag:
                 full_link = format_url(a_tag.get('href', ''))
                 full_img = format_url(img_tag.get('src', ''))
-                
                 title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
                 info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
                 
-                # โครงสร้าง JSON ของ NatPlayer
                 movies.append({
                     "name": title,
                     "url": full_link,
@@ -141,8 +118,6 @@ def get_movies_from_category(cat_name, cat_id):
                 
     except Exception as e:
         print(f"     [Error] ดึงข้อมูลล้มเหลว: {e}")
-    finally:
-        driver.quit()
         
     # ตัดข้อมูลที่ซ้ำกันทิ้ง
     unique_movies = []
@@ -157,7 +132,7 @@ def get_movies_from_category(cat_name, cat_id):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน NatPlayer + Smart Infinite Scroll)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน API Direct + NatPlayer)\n")
     
     all_groups_data = []
     
@@ -168,7 +143,7 @@ if __name__ == "__main__":
         
         movies_data = get_movies_from_category(cat['name'], cat['id'])
         
-        print(f"✅ ดึงสำเร็จ {len(movies_data)} เรื่อง\n")
+        print(f"✅ หมวด {cat['name']} ดึงสำเร็จ {len(movies_data)} เรื่อง\n")
         
         if movies_data:
             all_groups_data.append({
@@ -193,4 +168,4 @@ if __name__ == "__main__":
         json.dump(final_data, f, ensure_ascii=False, indent=2)
         
     elapsed = time.time() - start_time
-    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed / 60:.2f} นาที!")
+    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed:.2f} วินาที!")
