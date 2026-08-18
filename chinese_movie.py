@@ -3,13 +3,10 @@ import os
 import time
 from datetime import datetime
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 
 # ================== CONFIG ==================
 DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
@@ -37,27 +34,20 @@ OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
 # ================== ฟังก์ชันช่วยเหลือ ==================
 def get_driver():
-    """เปิดเบราว์เซอร์ล่องหน พร้อมระบบพรางตัวขั้นสุดยอด"""
-    options = Options()
+    """เปิดเบราว์เซอร์ด้วย undetected-chromedriver เพื่อทะลวง Cloudflare"""
+    options = uc.ChromeOptions()
     options.add_argument("--headless=new")
-    options.add_argument("--window-size=1920,1080")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    options.add_argument("--window-size=1920,1080")
     
-    prefs = {"profile.managed_default_content_settings.images": 2, "profile.managed_default_content_settings.stylesheets": 2}
+    # ลบการโหลดรูปภาพและ CSS เพื่อความไว (แต่ใน UC บางทีก็จำเป็นต้องให้มีรูปบ้างให้ดูเหมือนคน)
+    # แต่เราจะลองปิดดูก่อนเพื่อความเร็ว
+    prefs = {"profile.managed_default_content_settings.images": 2}
     options.add_experimental_option("prefs", prefs)
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option('useAutomationExtension', False)
 
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
-    
-    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-        "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-    })
+    # ใช้ undetected_chromedriver
+    driver = uc.Chrome(options=options, version_main=114) # อาจต้องปรับ version_main ให้ตรงกับที่ GitHub Actions มี 
     
     driver.set_page_load_timeout(45)
     driver.set_script_timeout(15)
@@ -69,51 +59,29 @@ def format_url(url_path):
     elif url_path.startswith('//'): return f"https:{url_path}"
     else: return f"{DOMAIN}/{url_path.lstrip('/')}"
 
-def navigate_smoothly(driver, target_url):
-    """เปลี่ยนหน้าเว็บด้วยการ 'คลิกลิงก์จำลอง' เพื่อหลอก Cloudflare ว่าเป็นคนกด"""
-    current_url = driver.current_url
-    if current_url == target_url:
-        return True
-        
-    js_code = f"""
-    var a = document.createElement('a');
-    a.href = '{target_url}';
-    document.body.appendChild(a);
-    a.click();
-    """
-    driver.execute_script(js_code)
-    
-    try:
-        # รอจนกว่า URL จะเปลี่ยนไปที่หน้าใหม่
-        WebDriverWait(driver, 10).until(lambda d: d.current_url != current_url)
-        # รอจนกว่าการ์ดหนังจะโหลดขึ้นมา
-        WebDriverWait(driver, 15).until(
-            lambda d: d.find_elements(By.CSS_SELECTOR, '.movie-card') or d.find_elements(By.ID, 'movie-end')
-        )
-        return True
-    except Exception as e:
-        print("     ⚠️ โหลดหน้าใหม่ไม่สำเร็จ หรือติดด่าน Cloudflare")
-        return False
-
 # ================== ฟังก์ชันดึงข้อมูลหลัก ==================
 def process_category(driver, cat_name, cat_id):
     movies = []
     seen = set()
     
-    print(f"     -> แอบกดเข้าหมวดหมู่เนียนๆ แบบคนเล่น...")
-    target_url = f"{DOMAIN}/categories.php?id={cat_id}"
+    print(f"     -> กำลังพยายามเข้าหมวดหมู่ {cat_name}...")
     
-    # เรียกใช้ฟังก์ชัน "กดคลิก" แทนการพิมพ์ URL 
-    success = navigate_smoothly(driver, target_url)
-    if not success:
-        driver.refresh()
-        time.sleep(5)
+    try:
+        # เปิด URL หมวดหมู่ตรงๆ
+        driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
         
-    # ดึงข้อมูลหน้า 1 ที่เพิ่งโหลดเสร็จ
+        # รอให้หน้าเว็บโหลด (คาดหวังว่าจะพบการ์ดหนัง หรือ ไม่ก็จุดจบหน้า)
+        WebDriverWait(driver, 15).until(
+            lambda d: d.find_elements(By.CSS_SELECTOR, '.movie-card') or d.find_elements(By.ID, 'movie-end')
+        )
+    except Exception as e:
+        print("     ⚠️ โหลดหน้าเว็บไม่สำเร็จ (อาจติดด่าน หรือไม่มีหนัง)")
+        return [] # ถ้าไม่สำเร็จ ก็คือไม่มีหนัง
+        
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     cards = soup.find_all('div', class_='movie-card')
     
-    # โค้ด JavaScript ลับสำหรับยิง API ขอหน้า 2, 3, 4... เบื้องหลัง
+    # โค้ด JavaScript ลับสำหรับยิง API 
     js_fetch_code = """
     var done = arguments[arguments.length - 1];
     var fd = new FormData();
@@ -131,12 +99,11 @@ def process_category(driver, cat_name, cat_id):
     """
     
     page = 2
-    # ถ้าหน้า 1 ดึงมาได้เกิน 28-30 เรื่อง แปลว่าน่าจะมีหน้า 2 ให้ลุยยิง API เลย
+    # ถ้าหน้าแรกมีการ์ดเยอะ ก็พยายามขุดหน้าต่อไป
     if len(cards) >= 28:
         while True:
             print(f"     -> ดึงหน้า {page} ผ่านระบบหลังบ้าน...")
             
-            # สั่งเบราว์เซอร์ให้ส่งคำขอดึงหนังเพิ่ม
             api_html = driver.execute_async_script(js_fetch_code, cat_id, page)
             
             if not api_html or api_html.strip() == "":
@@ -157,7 +124,7 @@ def process_category(driver, cat_name, cat_id):
                 break
                 
             page += 1
-            time.sleep(1) # พักให้เซิร์ฟเวอร์หายใจ
+            time.sleep(1) # พักเซิร์ฟเวอร์
             
     # ================== แปลงข้อมูลใส่ JSON ==================
     for card in cards:
@@ -167,7 +134,6 @@ def process_category(driver, cat_name, cat_id):
         if a_tag and img_tag:
             full_link = format_url(a_tag.get('href', ''))
             
-            # ตัดลิงก์ซ้ำทิ้งไป
             if full_link in seen: 
                 continue
             seen.add(full_link)
@@ -190,15 +156,20 @@ def process_category(driver, cat_name, cat_id):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Human Click Mimic)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Undetected Chromedriver)\n")
     
-    print("⚙️ กำลังเตรียมเบราว์เซอร์ และขอวีซ่าเข้าเว็บ...")
-    driver = get_driver()
-    
+    print("⚙️ กำลังเตรียมเบราว์เซอร์ล่องหน (Undetected)...")
+    try:
+        driver = get_driver()
+    except Exception as e:
+         print(f"❌ เปิดเบราว์เซอร์ไม่สำเร็จ: {e}")
+         exit(1)
+         
     all_groups_data = []
     
     try:
-        # เปิดหน้าหลักครั้งแรกเพื่อรับ Cookie และฝ่า Cloudflare
+        # เปิดหน้าหลักครั้งแรกเพื่อทดสอบ Cloudflare
+        print("     -> ทดสอบหน้าแรก...")
         driver.get(f"{DOMAIN}/categories.php")
         time.sleep(5) 
         
@@ -218,7 +189,7 @@ if __name__ == "__main__":
                     "stations": movies_data
                 })
                 
-            time.sleep(2) # พักก่อนกดเปลี่ยนหมวดหมู่ใหม่
+            time.sleep(2) # พักก่อนเปิดหมวดถัดไป
                 
     finally:
         driver.quit()
