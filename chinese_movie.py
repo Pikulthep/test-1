@@ -37,7 +37,7 @@ OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
 # ================== ฟังก์ชันช่วยเหลือ ==================
 def get_driver():
-    """เปิดเบราว์เซอร์พรางตัวขั้นสูงสุด"""
+    """เปิดเบราว์เซอร์ล่องหน พร้อมระบบพรางตัวขั้นสุดยอด"""
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--window-size=1920,1080")
@@ -60,7 +60,7 @@ def get_driver():
     })
     
     driver.set_page_load_timeout(45)
-    driver.set_script_timeout(20)
+    driver.set_script_timeout(15)
     return driver
 
 def format_url(url_path):
@@ -69,124 +69,139 @@ def format_url(url_path):
     elif url_path.startswith('//'): return f"https:{url_path}"
     else: return f"{DOMAIN}/{url_path.lstrip('/')}"
 
-# ================== ฟังก์ชันดึงข้อมูลแบบฉีด API (Injection) ==================
-def fetch_data_via_js(driver, cat_id, page):
-    """สั่งให้เบราว์เซอร์เป็นคนยิง API ขอข้อมูลหนังมาให้เราเอง"""
-    if page == 1:
-        js_code = """
-        var cat_id = arguments[0];
-        var done = arguments[arguments.length - 1];
-        fetch('categories.php?id=' + cat_id)
-        .then(r => r.text())
-        .then(html => done(html))
-        .catch(e => done(""));
-        """
-        return driver.execute_async_script(js_code, cat_id)
-    else:
-        js_code = """
-        var cat_id = arguments[0];
-        var page = arguments[1];
-        var done = arguments[arguments.length - 1];
-        var fd = new FormData();
-        fd.append('action', 'load_more_movies');
-        fd.append('category_id', cat_id);
-        fd.append('page', page);
-        fetch('load_more_movies.php', {
-            method: 'POST',
-            body: fd,
-            headers: {'X-Requested-With': 'XMLHttpRequest'}
-        })
-        .then(r => r.text())
-        .then(html => done(html))
-        .catch(e => done(""));
-        """
-        return driver.execute_async_script(js_code, cat_id, page)
+def navigate_smoothly(driver, target_url):
+    """เปลี่ยนหน้าเว็บด้วยการ 'คลิกลิงก์จำลอง' เพื่อหลอก Cloudflare ว่าเป็นคนกด"""
+    current_url = driver.current_url
+    if current_url == target_url:
+        return True
+        
+    js_code = f"""
+    var a = document.createElement('a');
+    a.href = '{target_url}';
+    document.body.appendChild(a);
+    a.click();
+    """
+    driver.execute_script(js_code)
+    
+    try:
+        # รอจนกว่า URL จะเปลี่ยนไปที่หน้าใหม่
+        WebDriverWait(driver, 10).until(lambda d: d.current_url != current_url)
+        # รอจนกว่าการ์ดหนังจะโหลดขึ้นมา
+        WebDriverWait(driver, 15).until(
+            lambda d: d.find_elements(By.CSS_SELECTOR, '.movie-card') or d.find_elements(By.ID, 'movie-end')
+        )
+        return True
+    except Exception as e:
+        print("     ⚠️ โหลดหน้าใหม่ไม่สำเร็จ หรือติดด่าน Cloudflare")
+        return False
 
+# ================== ฟังก์ชันดึงข้อมูลหลัก ==================
 def process_category(driver, cat_name, cat_id):
     movies = []
     seen = set()
-    page = 1
-    retry_count = 0
     
-    while True:
-        print(f"     ดึงข้อมูลหน้า {page} ...")
+    print(f"     -> แอบกดเข้าหมวดหมู่เนียนๆ แบบคนเล่น...")
+    target_url = f"{DOMAIN}/categories.php?id={cat_id}"
+    
+    # เรียกใช้ฟังก์ชัน "กดคลิก" แทนการพิมพ์ URL 
+    success = navigate_smoothly(driver, target_url)
+    if not success:
+        driver.refresh()
+        time.sleep(5)
         
-        # 🌟 ยิงขอข้อมูลจากเบราว์เซอร์ (เบื้องหลัง) โดยไม่เปิด URL ใหม่!
-        html = fetch_data_via_js(driver, cat_id, page)
-        
-        if not html or html.strip() == "":
-            retry_count += 1
-            if retry_count > 2:
-                print("     ✅ กวาดข้อมูลจนสุดแล้ว (ไม่มีข้อมูลตอบกลับ)")
+    # ดึงข้อมูลหน้า 1 ที่เพิ่งโหลดเสร็จ
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    cards = soup.find_all('div', class_='movie-card')
+    
+    # โค้ด JavaScript ลับสำหรับยิง API ขอหน้า 2, 3, 4... เบื้องหลัง
+    js_fetch_code = """
+    var done = arguments[arguments.length - 1];
+    var fd = new FormData();
+    fd.append('action', 'load_more_movies');
+    fd.append('category_id', arguments[0]);
+    fd.append('page', arguments[1]);
+    fetch('load_more_movies.php', {
+        method: 'POST',
+        body: fd,
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+    })
+    .then(r => r.text())
+    .then(html => done(html))
+    .catch(e => done(""));
+    """
+    
+    page = 2
+    # ถ้าหน้า 1 ดึงมาได้เกิน 28-30 เรื่อง แปลว่าน่าจะมีหน้า 2 ให้ลุยยิง API เลย
+    if len(cards) >= 28:
+        while True:
+            print(f"     -> ดึงหน้า {page} ผ่านระบบหลังบ้าน...")
+            
+            # สั่งเบราว์เซอร์ให้ส่งคำขอดึงหนังเพิ่ม
+            api_html = driver.execute_async_script(js_fetch_code, cat_id, page)
+            
+            if not api_html or api_html.strip() == "":
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว")
                 break
-            time.sleep(2)
-            continue
+                
+            api_soup = BeautifulSoup(api_html, 'html.parser')
+            new_cards = api_soup.find_all('div', class_='movie-card')
             
-        retry_count = 0 # รีเซ็ตถ้าดึงสำเร็จ
-        soup = BeautifulSoup(html, 'html.parser')
-        cards = soup.find_all('div', class_='movie-card')
+            if not new_cards:
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว")
+                break
+                
+            cards.extend(new_cards)
+            
+            if len(new_cards) < 30:
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว (ถึงหน้าสุดท้าย)")
+                break
+                
+            page += 1
+            time.sleep(1) # พักให้เซิร์ฟเวอร์หายใจ
+            
+    # ================== แปลงข้อมูลใส่ JSON ==================
+    for card in cards:
+        a_tag = card.find('a')
+        img_tag = card.find('img')
         
-        if not cards:
-            print("     ✅ กวาดข้อมูลจนสุดแล้ว (หมดการ์ดหนัง)")
-            break
+        if a_tag and img_tag:
+            full_link = format_url(a_tag.get('href', ''))
             
-        for card in cards:
-            a_tag = card.find('a')
-            img_tag = card.find('img')
+            # ตัดลิงก์ซ้ำทิ้งไป
+            if full_link in seen: 
+                continue
+            seen.add(full_link)
             
-            if a_tag and img_tag:
-                full_link = format_url(a_tag.get('href', ''))
-                
-                # ตัดลิงก์ซ้ำตั้งแต่ตอนดึง
-                if full_link in seen: 
-                    continue
-                seen.add(full_link)
-                
-                full_img = format_url(img_tag.get('src', ''))
-                title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
-                info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
-                
-                movies.append({
-                    "name": title,
-                    "url": full_link,
-                    "image": full_img,
-                    "referer": DOMAIN,
-                    "info": info_text,
-                    "playInNatPlayer": "true"
-                })
-                
-        # ถ้าดึงมาได้น้อยกว่า 20 เรื่อง แสดงว่าเป็นหน้าสุดท้ายแน่นอน (ปกติจะ 30 เรื่อง)
-        if len(cards) < 20:
-            print("     ✅ กวาดข้อมูลจนสุดแล้ว (ถึงหน้าสุดท้ายพอดี)")
-            break
+            full_img = format_url(img_tag.get('src', ''))
+            title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
+            info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
             
-        page += 1
-        time.sleep(1.5) # พักหายใจ 1.5 วิ ป้องกันโดนแบน
-        
+            movies.append({
+                "name": title,
+                "url": full_link,
+                "image": full_img,
+                "referer": DOMAIN,
+                "info": info_text,
+                "playInNatPlayer": "true"
+            })
+            
     return movies
 
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Absolute Stealth)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Human Click Mimic)\n")
     
-    print("⚙️ กำลังเปิดเบราว์เซอร์ และทำการล้างสมอง Cloudflare...")
+    print("⚙️ กำลังเตรียมเบราว์เซอร์ และขอวีซ่าเข้าเว็บ...")
     driver = get_driver()
     
     all_groups_data = []
     
     try:
-        # 🌟 พระเอกของงานนี้: เปิดหน้าแรกแค่ "ครั้งเดียว" และ "ค้างไว้" ตลอดกาล!
+        # เปิดหน้าหลักครั้งแรกเพื่อรับ Cookie และฝ่า Cloudflare
         driver.get(f"{DOMAIN}/categories.php")
-        try:
-            WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".site-header"))
-            )
-            print("✅ ผ่านด่าน Cloudflare สำเร็จ! เริ่มต้นดูดข้อมูลแบบไร้รอยต่อได้เลย\n")
-        except:
-            print("⚠️ รอหน้าเว็บนานเกินไป แต่จะลองฝืนดึงข้อมูลดู\n")
-            
-        # ลุยดึงทุกหมวดหมู่ผ่าน API พื้นหลัง โดยไม่เปลี่ยน URL เลย!
+        time.sleep(5) 
+        
         for cat in CATEGORIES:
             print(f"==================================================")
             print(f"🎬 หมวดหมู่: {cat['name']} (ID: {cat['id']})")
@@ -203,10 +218,10 @@ if __name__ == "__main__":
                     "stations": movies_data
                 })
                 
-            time.sleep(3) # พักระหว่างหมวดหมู่ให้แนบเนียน
+            time.sleep(2) # พักก่อนกดเปลี่ยนหมวดหมู่ใหม่
                 
     finally:
-        driver.quit() # ปิดเบราว์เซอร์เมื่อกวาดเรียบทุกหมวดแล้ว
+        driver.quit()
             
     # ================== สร้างไฟล์ JSON ==================
     os.makedirs(SAVE_DIR, exist_ok=True)
