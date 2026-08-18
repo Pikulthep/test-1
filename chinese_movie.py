@@ -14,20 +14,20 @@ DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
 
 # 🌟 จัดเต็มทุกหมวดหมู่
 CATEGORIES = [
-    {"name": "ข้ามมิติ", "id": "16", "max_page": 3},
-    {"name": "ครอบครัว", "id": "1", "max_page": 2},
-    {"name": "ความรัก", "id": "15", "max_page": 24},
+    {"name": "ข้ามมิติ", "id": "16", "max_page": 1},
+    {"name": "ครอบครัว", "id": "1", "max_page": 1},
+    {"name": "ความรัก", "id": "15", "max_page": 1},
     {"name": "คอมเมดี้", "id": "14", "max_page": 1},
-    {"name": "ซับไทย", "id": "25", "max_page": 9},
+    {"name": "ซับไทย", "id": "25", "max_page": 1},
     {"name": "ซีรีส์มาใหม่", "id": "5", "max_page": 1},
     {"name": "ซีรีส์แนะนำ", "id": "26", "max_page": 1},
-    {"name": "ดราม่า", "id": "2", "max_page": 3},
-    {"name": "พลิกเกม", "id": "23", "max_page": 7},
-    {"name": "ย้อนยุค", "id": "22", "max_page": 7},
+    {"name": "ดราม่า", "id": "2", "max_page": 1},
+    {"name": "พลิกเกม", "id": "23", "max_page": 1},
+    {"name": "ย้อนยุค", "id": "22", "max_page": 1},
     {"name": "สะท้อนสังคม", "id": "3", "max_page": 1},
-    {"name": "เกิดใหม่", "id": "17", "max_page": 3},
-    {"name": "เทพเซียน", "id": "19", "max_page": 3},
-    {"name": "แก้แค้น", "id": "13", "max_page": 6},
+    {"name": "เกิดใหม่", "id": "17", "max_page": 1},
+    {"name": "เทพเซียน", "id": "19", "max_page": 1},
+    {"name": "แก้แค้น", "id": "13", "max_page": 1},
     {"name": "แอ็คชั่น", "id": "18", "max_page": 1}
 ]
 
@@ -45,7 +45,10 @@ def get_driver():
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     
     # ปิดโหลดรูปเพื่อความไว
-    prefs = {"profile.managed_default_content_settings.images": 2, "profile.managed_default_content_settings.stylesheets": 2}
+    prefs = {
+        "profile.managed_default_content_settings.images": 2, 
+        "profile.managed_default_content_settings.stylesheets": 2
+    }
     options.add_experimental_option("prefs", prefs)
 
     service = Service(ChromeDriverManager().install())
@@ -53,6 +56,17 @@ def get_driver():
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.set_page_load_timeout(45)
     return driver
+
+def format_url(url_path):
+    """ฟังก์ชันจัดการลิงก์ให้สมบูรณ์และป้องกันลิงก์เสีย"""
+    if not url_path:
+        return ""
+    if url_path.startswith('http'):
+        return url_path
+    elif url_path.startswith('//'):
+        return f"https:{url_path}"
+    else:
+        return f"{DOMAIN}/{url_path.lstrip('/')}"
 
 # ================== ฟังก์ชันดึงข้อมูล ==================
 def get_movies_from_category(cat_name, cat_id, max_page):
@@ -88,11 +102,9 @@ def get_movies_from_category(cat_name, cat_id, max_page):
             img_tag = card.find('img')
             
             if a_tag and img_tag:
-                href = a_tag.get('href', '')
-                full_link = f"{DOMAIN}/{href.lstrip('/')}" if not href.startswith('http') else href
-                
-                src = img_tag.get('src', '')
-                full_img = f"{DOMAIN}/{src.lstrip('/')}" if not src.startswith('http') else src
+                # ใช้ฟังก์ชันช่วยต่อลิงก์ที่อัปเกรดแล้ว
+                full_link = format_url(a_tag.get('href', ''))
+                full_img = format_url(img_tag.get('src', ''))
                 
                 title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
                 info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
