@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 # ================== CONFIG ==================
 DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
@@ -34,20 +34,22 @@ OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
 # ================== ฟังก์ชันช่วยเหลือ ==================
 def get_driver():
-    """เปิดเบราว์เซอร์ด้วย undetected-chromedriver เพื่อทะลวง Cloudflare"""
+    """เปิดเบราว์เซอร์ด้วย undetected-chromedriver เพื่อทะลวง Cloudflare อัตโนมัติ"""
     options = uc.ChromeOptions()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     
-    # ลบการโหลดรูปภาพและ CSS เพื่อความไว (แต่ใน UC บางทีก็จำเป็นต้องให้มีรูปบ้างให้ดูเหมือนคน)
-    # แต่เราจะลองปิดดูก่อนเพื่อความเร็ว
+    # ปิดโหลดรูปเพื่อความไว
     prefs = {"profile.managed_default_content_settings.images": 2}
     options.add_experimental_option("prefs", prefs)
 
-    # ใช้ undetected_chromedriver
-    driver = uc.Chrome(options=options, version_main=114) # อาจต้องปรับ version_main ให้ตรงกับที่ GitHub Actions มี 
+    # 🌟 ให้ webdriver_manager หา path ของเวอร์ชันปัจจุบันให้อัตโนมัติ
+    driver_path = ChromeDriverManager().install()
+    
+    # ยัด path ที่ตรงกันเข้าไปใน undetected_chromedriver
+    driver = uc.Chrome(driver_executable_path=driver_path, options=options)
     
     driver.set_page_load_timeout(45)
     driver.set_script_timeout(15)
@@ -156,7 +158,7 @@ def process_category(driver, cat_name, cat_id):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Undetected Chromedriver)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Undetected Chromedriver Auto-Version)\n")
     
     print("⚙️ กำลังเตรียมเบราว์เซอร์ล่องหน (Undetected)...")
     try:
