@@ -34,22 +34,23 @@ OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
 # ================== ฟังก์ชันช่วยเหลือ ==================
 def get_driver():
-    """เปิดเบราว์เซอร์ด้วย undetected-chromedriver เพื่อทะลวง Cloudflare อัตโนมัติ"""
     options = uc.ChromeOptions()
-    options.add_argument("--headless=new")
+    
+    # 🌟 เอา Headless ออกไปเลย! เราจะเปิดหน้าต่างจริงๆ ผ่านหน้าจอเสมือน Xvfb
+    # options.add_argument("--headless=new") 
+    
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-blink-features=AutomationControlled")
     
-    # ปิดโหลดรูปเพื่อความไว
     prefs = {"profile.managed_default_content_settings.images": 2}
     options.add_experimental_option("prefs", prefs)
 
-    # 🌟 ให้ webdriver_manager หา path ของเวอร์ชันปัจจุบันให้อัตโนมัติ
     driver_path = ChromeDriverManager().install()
     
-    # ยัด path ที่ตรงกันเข้าไปใน undetected_chromedriver
-    driver = uc.Chrome(driver_executable_path=driver_path, options=options)
+    # ใส่ headless=False เพื่อบังคับเปิดหน้าต่าง
+    driver = uc.Chrome(driver_executable_path=driver_path, options=options, headless=False)
     
     driver.set_page_load_timeout(45)
     driver.set_script_timeout(15)
@@ -69,21 +70,19 @@ def process_category(driver, cat_name, cat_id):
     print(f"     -> กำลังพยายามเข้าหมวดหมู่ {cat_name}...")
     
     try:
-        # เปิด URL หมวดหมู่ตรงๆ
         driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
         
-        # รอให้หน้าเว็บโหลด (คาดหวังว่าจะพบการ์ดหนัง หรือ ไม่ก็จุดจบหน้า)
-        WebDriverWait(driver, 15).until(
+        # 🌟 รอให้ Cloudflare ปล่อยผ่าน (บนหน้าจอจำลอง มันจะเนียนเหมือนคนจริง)
+        WebDriverWait(driver, 20).until(
             lambda d: d.find_elements(By.CSS_SELECTOR, '.movie-card') or d.find_elements(By.ID, 'movie-end')
         )
     except Exception as e:
         print("     ⚠️ โหลดหน้าเว็บไม่สำเร็จ (อาจติดด่าน หรือไม่มีหนัง)")
-        return [] # ถ้าไม่สำเร็จ ก็คือไม่มีหนัง
+        return []
         
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     cards = soup.find_all('div', class_='movie-card')
     
-    # โค้ด JavaScript ลับสำหรับยิง API 
     js_fetch_code = """
     var done = arguments[arguments.length - 1];
     var fd = new FormData();
@@ -101,34 +100,29 @@ def process_category(driver, cat_name, cat_id):
     """
     
     page = 2
-    # ถ้าหน้าแรกมีการ์ดเยอะ ก็พยายามขุดหน้าต่อไป
     if len(cards) >= 28:
         while True:
-            print(f"     -> ดึงหน้า {page} ผ่านระบบหลังบ้าน...")
+            print(f"     -> ดึงหน้า {page} ผ่าน API...")
             
             api_html = driver.execute_async_script(js_fetch_code, cat_id, page)
             
             if not api_html or api_html.strip() == "":
-                print("     ✅ กวาดข้อมูลจนสุดแล้ว")
                 break
                 
             api_soup = BeautifulSoup(api_html, 'html.parser')
             new_cards = api_soup.find_all('div', class_='movie-card')
             
             if not new_cards:
-                print("     ✅ กวาดข้อมูลจนสุดแล้ว")
                 break
                 
             cards.extend(new_cards)
             
             if len(new_cards) < 30:
-                print("     ✅ กวาดข้อมูลจนสุดแล้ว (ถึงหน้าสุดท้าย)")
                 break
                 
             page += 1
-            time.sleep(1) # พักเซิร์ฟเวอร์
+            time.sleep(1.5)
             
-    # ================== แปลงข้อมูลใส่ JSON ==================
     for card in cards:
         a_tag = card.find('a')
         img_tag = card.find('img')
@@ -158,9 +152,9 @@ def process_category(driver, cat_name, cat_id):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Undetected Chromedriver Auto-Version)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Xvfb Display Hack)\n")
     
-    print("⚙️ กำลังเตรียมเบราว์เซอร์ล่องหน (Undetected)...")
+    print("⚙️ กำลังเตรียมเบราว์เซอร์บนหน้าจอเสมือน...")
     try:
         driver = get_driver()
     except Exception as e:
@@ -170,10 +164,9 @@ if __name__ == "__main__":
     all_groups_data = []
     
     try:
-        # เปิดหน้าหลักครั้งแรกเพื่อทดสอบ Cloudflare
-        print("     -> ทดสอบหน้าแรก...")
+        print("     -> ทดสอบเข้าหน้าแรกเพื่อยืนยันตัวตนกับ Cloudflare...")
         driver.get(f"{DOMAIN}/categories.php")
-        time.sleep(5) 
+        time.sleep(8) # ให้เวลา Cloudflare โหลดให้หนำใจ
         
         for cat in CATEGORIES:
             print(f"==================================================")
@@ -191,7 +184,7 @@ if __name__ == "__main__":
                     "stations": movies_data
                 })
                 
-            time.sleep(2) # พักก่อนเปิดหมวดถัดไป
+            time.sleep(3) 
                 
     finally:
         driver.quit()
