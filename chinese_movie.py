@@ -1,5 +1,8 @@
-import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import json
 import os
 import time
@@ -29,6 +32,29 @@ CATEGORIES = [
 SAVE_DIR = "output"
 OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
+# ================== ฟังก์ชันช่วยเหลือ ==================
+def get_driver():
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    
+    prefs = {
+        "profile.managed_default_content_settings.images": 2, 
+        "profile.managed_default_content_settings.stylesheets": 2
+    }
+    options.add_experimental_option("prefs", prefs)
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.set_page_load_timeout(45)
+    # สำคัญ: ตั้งเวลา Timeout สำหรับ Async Script
+    driver.set_script_timeout(15)
+    return driver
+
 def format_url(url_path):
     if not url_path:
         return ""
@@ -40,63 +66,68 @@ def format_url(url_path):
         return f"{DOMAIN}/{url_path.lstrip('/')}"
 
 # ================== ฟังก์ชันดึงข้อมูล ==================
-def get_movies_from_category(cat_name, cat_id):
+def get_movies_from_category(driver, cat_name, cat_id):
     movies = []
     
-    # 🌟 สร้าง Session เพื่อเก็บคุกกี้ ป้องกันการโดนเตะ
-    session = requests.Session()
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Referer': f"{DOMAIN}/categories.php?id={cat_id}"
-    }
-    
     try:
-        # ดึงหน้าแรก (หน้าที่ 1) เพื่อเอาคุกกี้และข้อมูลชุดแรก 30 เรื่อง
-        print(f"  -> ดึงหน้า 1...")
-        res = session.get(f"{DOMAIN}/categories.php?id={cat_id}", headers=headers, timeout=10)
-        soup = BeautifulSoup(res.text, 'html.parser')
+        print(f"  -> กำลังเปิดหน้าหมวดหมู่เพื่อทะลวง Cloudflare...")
+        driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
+        time.sleep(5) # รอให้ระบบยืนยันตัวตน Cloudflare ทำงานเสร็จ
+        
+        # 🌟 ดึงข้อมูลหน้าแรก (หน้าที่ 1)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
         cards = soup.find_all('div', class_='movie-card')
         
-        # 🌟 ลูปยิง API ขอหน้า 2, 3, 4 ไปเรื่อยๆ จนกว่ามันจะส่งเนื้อหาเปล่ามาให้
+        # 🌟 โค้ด JavaScript ลับสำหรับเจาะ API จากภายในเบราว์เซอร์
+        js_fetch_code = """
+        var done = arguments[arguments.length - 1];
+        var page = arguments[0];
+        var cat_id = arguments[1];
+        
+        var formData = new FormData();
+        formData.append('action', 'load_more_movies');
+        formData.append('page', page);
+        formData.append('category_id', cat_id);
+
+        fetch('load_more_movies.php', {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.text())
+        .then(html => done(html))
+        .catch(err => done(""));
+        """
+        
+        # ดึงหน้า 2, 3, 4... ไปเรื่อยๆ
         page = 2
         while True:
-            print(f"  -> ดึงหน้า {page}...")
-            api_url = f"{DOMAIN}/load_more_movies.php"
-            payload = {'action': 'load_more_movies', 'page': page, 'category_id': cat_id}
+            print(f"     ดึงข้อมูลหน้า {page} ...")
+            # สั่งให้เบราว์เซอร์ยิง API เองเลย
+            api_html = driver.execute_async_script(js_fetch_code, page, cat_id)
             
-            # ยิง POST ตามแบบฉบับที่หน้าเว็บมันเขียนเป๊ะๆ
-            post_headers = headers.copy()
-            post_headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-            post_headers['X-Requested-With'] = 'XMLHttpRequest'
-            
-            api_res = session.post(api_url, data=payload, headers=post_headers, timeout=10)
-            html_data = api_res.text
-            
-            # ถ้า API ส่งค่าว่างมา แปลว่าหนังหมดหมวดแล้ว
-            if not html_data.strip():
-                print("     ✅ หมดแล้ว! ไม่มีหนังเพิ่มเติม")
+            if not api_html or api_html.strip() == "":
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว (ไม่มีหนังเพิ่ม)")
                 break
                 
-            api_soup = BeautifulSoup(html_data, 'html.parser')
+            api_soup = BeautifulSoup(api_html, 'html.parser')
             new_cards = api_soup.find_all('div', class_='movie-card')
             
             if not new_cards:
-                print("     ✅ หมดแล้ว! ไม่พบการ์ดหนัง")
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว (หมดการ์ดหนัง)")
                 break
                 
-            # เอาการ์ดหนังหน้าใหม่ไปรวมกับของเก่า
             cards.extend(new_cards)
             
-            # เช็คว่าถ้าหน้าสุดท้ายมันดึงมาไม่ถึง 30 เรื่อง แปลว่าหมดพอดี ไม่ต้องขอหน้าถัดไปแล้ว
+            # ถ้าหน้าล่าสุดที่ดึงมามีหนังไม่ถึง 30 เรื่อง แปลว่าเป็นหน้าสุดท้ายแล้ว
             if len(new_cards) < 30:
-                print("     ✅ หมดแล้ว! ถึงหน้าสุดท้ายพอดี")
+                print("     ✅ กวาดข้อมูลจนสุดแล้ว (ถึงหน้าสุดท้าย)")
                 break
                 
             page += 1
-            time.sleep(1) # พักหายใจ 1 วิ ป้องกันโดนแบน
+            time.sleep(1) # พัก 1 วิกันโดนบล็อก
             
-        # ================== แกะข้อมูลใส่แพ็กเกจ JSON ==================
+        # ================== แปลงข้อมูลใส่ JSON Format ==================
         for card in cards:
             a_tag = card.find('a')
             img_tag = card.find('img')
@@ -104,6 +135,7 @@ def get_movies_from_category(cat_name, cat_id):
             if a_tag and img_tag:
                 full_link = format_url(a_tag.get('href', ''))
                 full_img = format_url(img_tag.get('src', ''))
+                
                 title = img_tag.get('alt', 'ไม่ทราบชื่อเรื่อง')
                 info_text = "ซับไทย" if cat_name == "ซับไทย" else "พากย์ไทย"
                 
@@ -132,25 +164,32 @@ def get_movies_from_category(cat_name, cat_id):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน API Direct + NatPlayer)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Hybrid API Bypass)\n")
+    
+    # เปิดเบราว์เซอร์แค่ตัวเดียว ใช้ลุยทุกหมวดหมู่ (ประหยัดแรมและเร็วขึ้น)
+    print("⚙️ กำลังเตรียมเบราว์เซอร์...")
+    main_driver = get_driver()
     
     all_groups_data = []
     
-    for cat in CATEGORIES:
-        print(f"==================================================")
-        print(f"🎬 หมวดหมู่: {cat['name']} (ID: {cat['id']})")
-        print(f"==================================================")
-        
-        movies_data = get_movies_from_category(cat['name'], cat['id'])
-        
-        print(f"✅ หมวด {cat['name']} ดึงสำเร็จ {len(movies_data)} เรื่อง\n")
-        
-        if movies_data:
-            all_groups_data.append({
-                "name": f"🀄 {cat['name']}",
-                "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
-                "stations": movies_data
-            })
+    try:
+        for cat in CATEGORIES:
+            print(f"==================================================")
+            print(f"🎬 หมวดหมู่: {cat['name']} (ID: {cat['id']})")
+            print(f"==================================================")
+            
+            movies_data = get_movies_from_category(main_driver, cat['name'], cat['id'])
+            
+            print(f"🎯 หมวด {cat['name']} กวาดมาได้ทั้งหมด {len(movies_data)} เรื่อง!\n")
+            
+            if movies_data:
+                all_groups_data.append({
+                    "name": f"🀄 {cat['name']}",
+                    "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
+                    "stations": movies_data
+                })
+    finally:
+        main_driver.quit() # ปิดเบราว์เซอร์ตอนทำงานเสร็จทั้งหมด
             
     # ================== สร้างไฟล์ JSON ==================
     os.makedirs(SAVE_DIR, exist_ok=True)
@@ -168,4 +207,4 @@ if __name__ == "__main__":
         json.dump(final_data, f, ensure_ascii=False, indent=2)
         
     elapsed = time.time() - start_time
-    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed:.2f} วินาที!")
+    print(f"🎉 จบการทำงานทั้งหมดภายในเวลา {elapsed / 60:.2f} นาที!")
