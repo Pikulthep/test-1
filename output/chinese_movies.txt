@@ -1,0 +1,7 @@
+{
+  "name": "รวมหนังสั้นจีน (โรงหยก)",
+  "author": "Auto Update (18/08/2026)",
+  "info": "ซีรีส์จีนสั้นยอดฮิต",
+  "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
+  "groups": []
+}
