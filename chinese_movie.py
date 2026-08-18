@@ -12,23 +12,23 @@ from datetime import datetime
 # ================== CONFIG ==================
 DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online"
 
-# 🌟 จัดเต็มทุกหมวดหมู่
+# 🌟 ไม่ต้องพึ่ง max_page อีกต่อไป! บอทจะเลื่อนกวาดจนกว่าจะสุดหน้าเว็บเอง
 CATEGORIES = [
-    {"name": "ข้ามมิติ", "id": "16", "max_page": 1},
-    {"name": "ครอบครัว", "id": "1", "max_page": 1},
-    {"name": "ความรัก", "id": "15", "max_page": 1},
-    {"name": "คอมเมดี้", "id": "14", "max_page": 1},
-    {"name": "ซับไทย", "id": "25", "max_page": 1},
-    {"name": "ซีรีส์มาใหม่", "id": "5", "max_page": 1},
-    {"name": "ซีรีส์แนะนำ", "id": "26", "max_page": 1},
-    {"name": "ดราม่า", "id": "2", "max_page": 1},
-    {"name": "พลิกเกม", "id": "23", "max_page": 1},
-    {"name": "ย้อนยุค", "id": "22", "max_page": 1},
-    {"name": "สะท้อนสังคม", "id": "3", "max_page": 1},
-    {"name": "เกิดใหม่", "id": "17", "max_page": 1},
-    {"name": "เทพเซียน", "id": "19", "max_page": 1},
-    {"name": "แก้แค้น", "id": "13", "max_page": 1},
-    {"name": "แอ็คชั่น", "id": "18", "max_page": 1}
+    {"name": "ข้ามมิติ", "id": "16"},
+    {"name": "ครอบครัว", "id": "1"},
+    {"name": "ความรัก", "id": "15"},
+    {"name": "คอมเมดี้", "id": "14"},
+    {"name": "ซับไทย", "id": "25"},
+    {"name": "ซีรีส์มาใหม่", "id": "5"},
+    {"name": "ซีรีส์แนะนำ", "id": "26"},
+    {"name": "ดราม่า", "id": "2"},
+    {"name": "พลิกเกม", "id": "23"},
+    {"name": "ย้อนยุค", "id": "22"},
+    {"name": "สะท้อนสังคม", "id": "3"},
+    {"name": "เกิดใหม่", "id": "17"},
+    {"name": "เทพเซียน", "id": "19"},
+    {"name": "แก้แค้น", "id": "13"},
+    {"name": "แอ็คชั่น", "id": "18"}
 ]
 
 SAVE_DIR = "output"
@@ -36,7 +36,7 @@ OUTPUT_FILE = os.path.join(SAVE_DIR, "chinese_movies.txt")
 
 # ================== ฟังก์ชันช่วยเหลือ ==================
 def get_driver():
-    """ฟังก์ชันเปิดเบราว์เซอร์ล่องหน เพื่อหลบ Cloudflare"""
+    """เปิดเบราว์เซอร์ล่องหน เพื่อหลบ Cloudflare"""
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
@@ -44,7 +44,6 @@ def get_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     
-    # ปิดโหลดรูปเพื่อความไว
     prefs = {
         "profile.managed_default_content_settings.images": 2, 
         "profile.managed_default_content_settings.stylesheets": 2
@@ -58,7 +57,7 @@ def get_driver():
     return driver
 
 def format_url(url_path):
-    """ฟังก์ชันจัดการลิงก์ให้สมบูรณ์และป้องกันลิงก์เสีย"""
+    """ฟังก์ชันจัดการลิงก์ให้สมบูรณ์ ป้องกันบั๊กลิงก์เสีย"""
     if not url_path:
         return ""
     if url_path.startswith('http'):
@@ -69,30 +68,52 @@ def format_url(url_path):
         return f"{DOMAIN}/{url_path.lstrip('/')}"
 
 # ================== ฟังก์ชันดึงข้อมูล ==================
-def get_movies_from_category(cat_name, cat_id, max_page):
+def get_movies_from_category(cat_name, cat_id):
     movies = []
     driver = get_driver()
     
     try:
-        print(f"  -> กำลังเปิดหน้าหมวดหมู่เพื่อหลบระบบป้องกัน (Cloudflare)...")
+        print(f"  -> กำลังเปิดหน้าหมวดหมู่ {cat_name}...")
         driver.get(f"{DOMAIN}/categories.php?id={cat_id}")
-        time.sleep(6) # ให้เวลาเจาะกำแพง
+        time.sleep(6) # ให้เวลาเจาะกำแพง Cloudflare
         
-        # เลื่อนจอลงด้านล่างเพื่อให้เว็บโหลดหนังเพิ่ม (Infinite Scroll)
-        for page in range(1, max_page):
-            print(f"     เลื่อนจอโหลดข้อมูลหน้า {page + 1}/{max_page} ...")
-            driver.execute_script("""
-                var sentinel = document.getElementById('movie-sentinel');
-                if(sentinel) {
-                    sentinel.scrollIntoView();
-                } else {
-                    window.scrollTo(0, document.body.scrollHeight);
-                }
-            """)
-            time.sleep(4) # รอให้การ์ดหนังหน้าใหม่เด้งขึ้นมา
+        last_count = 0
+        retry = 0
+        
+        # 🌟 ระบบเลื่อนจอแบบ Smart Scroll (ฉลาดและทนทานขึ้น)
+        for _ in range(60): # ลูปสูงสุดเผื่อไว้ 60 ครั้ง (รองรับหนัง 1,800+ เรื่อง)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        cards = soup.find_all('div', class_='movie-card')
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            
+            # 1. เช็คว่าเจอข้อความ "ไม่มีหนังเพิ่มเติมแล้ว" (id="movie-end") หรือยัง
+            end_element = soup.find('div', id='movie-end')
+            if end_element and 'hidden' not in end_element.get('class', []):
+                print("     ✅ ดึงข้อมูลจนสุดหน้าเว็บแล้ว")
+                break
+                
+            # 2. เช็คจำนวนการ์ดหนังว่าเพิ่มขึ้นไหม
+            current_count = len(soup.find_all('div', class_='movie-card'))
+            if current_count > last_count:
+                print(f"     ⏳ กำลังโหลด... กวาดมาได้แล้ว {current_count} เรื่อง")
+                last_count = current_count
+                retry = 0
+            else:
+                retry += 1
+                # ทริก: ขยับจอขึ้นลงนิดหน่อย เพื่อกระตุ้นระบบโหลดของเว็บ
+                driver.execute_script("window.scrollBy(0, -800);")
+                time.sleep(1)
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(2)
+                
+                if retry >= 4:
+                    print("     ⚠️ โหลดหน้าเว็บเพิ่มไม่ได้แล้ว (อาจจะสุดหน้าจริงๆ)")
+                    break
+            
+        # กวาดข้อมูลจากโครงสร้างที่ดึงได้ทั้งหมด
+        final_soup = BeautifulSoup(driver.page_source, 'html.parser')
+        cards = final_soup.find_all('div', class_='movie-card')
         
         if not cards:
             print("     [ไม่พบการ์ดหนัง] เว็บอาจจะบล็อก หรือไม่มีข้อมูล")
@@ -102,7 +123,6 @@ def get_movies_from_category(cat_name, cat_id, max_page):
             img_tag = card.find('img')
             
             if a_tag and img_tag:
-                # ใช้ฟังก์ชันช่วยต่อลิงก์ที่อัปเกรดแล้ว
                 full_link = format_url(a_tag.get('href', ''))
                 full_img = format_url(img_tag.get('src', ''))
                 
@@ -124,7 +144,7 @@ def get_movies_from_category(cat_name, cat_id, max_page):
     finally:
         driver.quit()
         
-    # ลบข้อมูลหนังที่ซ้ำกัน
+    # ตัดข้อมูลที่ซ้ำกันทิ้ง
     unique_movies = []
     seen = set()
     for m in movies:
@@ -137,7 +157,7 @@ def get_movies_from_category(cat_name, cat_id, max_page):
 # ================== Main Program ==================
 if __name__ == "__main__":
     start_time = time.time()
-    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน Selenium Stealth + NatPlayer)\n")
+    print("🚀 เริ่มต้นดึงข้อมูลเว็บหนังสั้นจีน (เวอร์ชัน NatPlayer + Smart Infinite Scroll)\n")
     
     all_groups_data = []
     
@@ -146,7 +166,7 @@ if __name__ == "__main__":
         print(f"🎬 หมวดหมู่: {cat['name']} (ID: {cat['id']})")
         print(f"==================================================")
         
-        movies_data = get_movies_from_category(cat['name'], cat['id'], cat['max_page'])
+        movies_data = get_movies_from_category(cat['name'], cat['id'])
         
         print(f"✅ ดึงสำเร็จ {len(movies_data)} เรื่อง\n")
         
