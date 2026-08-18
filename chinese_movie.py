@@ -10,13 +10,8 @@ DOMAIN = "https://www.xn--72c9ab1ec1bc6q.online" # โดเมนเว็บ�
 
 # 🌟 ตั้งค่าหมวดหมู่ที่ต้องการดึง (ดู ID ได้จากลิงก์บนเว็บ หรือจากโค้ด HTML)
 CATEGORIES = [
-    {"name": "ข้ามมิติ", "id": "16", "max_page": 2},
-    {"name": "ครอบครัว", "id": "1", "max_page": 1},
-    {"name": "ความรัก", "id": "15", "max_page": 3},
-    {"name": "พลิกเกม", "id": "23", "max_page": 2},
-    {"name": "ย้อนยุค", "id": "22", "max_page": 2},
-    {"name": "เกิดใหม่", "id": "17", "max_page": 1},
-    {"name": "แก้แค้น", "id": "13", "max_page": 2}
+    {"name": "ข้ามมิติ", "id": "16", "max_page": 2}
+
 ]
 
 SAVE_DIR = "output"
