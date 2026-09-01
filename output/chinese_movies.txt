@@ -1,6 +1,6 @@
 {
   "name": "รวมหนังสั้นจีน (โรงหยก)",
-  "author": "Auto Update (18/08/2026)",
+  "author": "Auto Update (01/09/2026)",
   "info": "ซีรีส์จีนสั้นยอดฮิต",
   "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
   "groups": [
@@ -8,6 +8,14 @@
       "name": "🀄 ข้ามมิติ",
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
+        {
+          "name": "พวกพระเอกได้ยินเสียงในใจฉัน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2089",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7d36eda7d4ece2b487c15a1d3edec1dc.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
         {
           "name": "ร้านค้าทะลุมิติ",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2007",
@@ -583,9 +591,49 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "เจ้าสาวแทนพิชิตใจเศรษฐี",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2103",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f6588c9dce941344bb2b5bdec69b2d94.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สามปีในโคมแดง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2080",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f4c3a232b1b0185135962fc40a2b283e.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "นางฟ้าผู้พิทักษ์ของกอตฟาเธอร์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2072",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ca319ce964728a82b7253efc86090e32.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เมื่อผมกลับไปตอนแปดขวบ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2051",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/bbd52f2e7b92ce372da0904f043b6b91.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "พันธสัญญาแห่งเลือดเจ้าสาวมาเฟีย",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2015",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/1a1098f2fb4525da6dc4fbbbd4a7decf.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ลูกลับพ่อใจจดกับนมขวด",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2012",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e709e9f91335bf309d0edcc6aeff3008.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -1037,6 +1085,350 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "แผนร้ายให้เธอรับรัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2136",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e1c689c479d6ba21e8b320bd9f71de0f.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เสพติดพิษรัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2134",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/06b3bf139eb57914108f94a4d55bf185.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สายเลือดแห่งสุริยัน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2132",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d58c454f1b22248ef74b71cf38a18ee9.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ดีไซน์รัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2131",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/1f8956f10faa667c770cce101087f988.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "รักวุ่นลุ้นหัวใจ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2130",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/4b63845dc0439a6326876a745fadd7d8.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ทายซิ ตอนนี้ใครโดนเท",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2129",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/eddd90605f6c7f49a4aa9f8ab8216d93.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "รักผิดคน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2126",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/0abb379f8cfebf7ae90ea5f7bd4f0dc7.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "กำเนิดรักแด่เจ้าชายนิทรา",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2122",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/39db60567569c39df72a79a338fda6f1.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ห้าปีของความสัมพันธ์ที่ไม่มีชื่อ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2121",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/3b3e4a83dd86eed4b0b053a665108991.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เสน่หาลับ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2119",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/2d7da3a6a4277cc2ed664e9940132f39.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "กฎลิลลี่แห่งหุบเขา",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2118",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d9f0ca35778becb380c40506b53c1444.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ฉันท้องแต่ไม่ใช่ลูกคุณ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2117",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/a285c5996c4533cd432ec868e491d401.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ฟ้าเท่านั้นที่เป็นพยาน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2111",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/5c90a86dd4468b4ae7a27f0bd7e09bf1.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "รักที่ซ่อนไม่มิด",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2110",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d51b138220fd051fab350f31d9634e53.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "จากนี้ฉันไม่ใช่เมียลับของบอสมาเฟียอีกแล้ว",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2105",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7aecb89e6271d5e18406bfdce54ad49e.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เจ้าสาวของราชานักบิด",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2102",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/dd92027199e112e28125e9c27bd6cdac.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ถูกครอบครองโดยพี่น้องฝาแฝด",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2097",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/3339cc6c086f76e190c6807647b743cc.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "หักปีกถอนรักราชัน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2096",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7acd312177406e3e0bd53e04cbd18624.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "หนึ่งคืนหนึ่งใจ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2095",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7adc7f94ae4d4e7f843f1c00f6915607.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ทะลุมิติสู่โลกอสูรฉันดันมีพลังอ่านใจ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2094",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6a017c06a48ffa6f09fe64408a1e9a51.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สายไปแล้วอัลฟ่าของฉัน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2093",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/a3c5cab02563491f9b9d977aed817d5e.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "วิวาห์ที่ไม่มีวันเป็นจริง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2092",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/b008d8860e1b5de7f7da97b5e45b2858.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สยบเหล่าสามีสัตว์อสูร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2090",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/25b622d38200fadf24b3a010135bcd31.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "บังเอิญเจอบังเอิญรัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2088",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/74d485500933bfe8392d638057c5e00e.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เล่ห์รักบังคับใจทายาทหมื่นล้าน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2083",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6216a3d5b127205a94b2c61b8c3f56ba.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "นายเลขามหาเศรษฐี",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2077",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/924d47b90988f5c2ca2cee8879e82e4c.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พันธะรักเจ้าหญิงต้องสาป",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2076",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6585c729a602eed2f6830ed805821660.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "คนรักรับเป็นคู่หมั้นของพี่สาว",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2073",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/0ecbd24a859ef87cbe60e3a712e81a29.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สืบล่าท้าหัวใจ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2069",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/fe44c303b791918c7ab3ff8ad80b0285.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เจ้าบ่าวขอทานคือเทพแห่งแสง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2067",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/c53f43bad987614266759e822d5ad1c6.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ราชินีท้องของเจ้าพ่อมาเฟีย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2065",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ca47e3e46097f158ec9ced9753459ab6.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "แต่งกับคนจนพบรักเศรษฐี",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2064",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/c2ef03f19f722236c05041b6a154924c.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "งานแต่งที่ฉันไม่ตาย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2062",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/4db82716c4d74c0bfe23879463a41a1b.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ใครว่าผมเป็นเขยกระจอก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2061",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/28a446ecb968fa0eff8c82dc28a9af9b.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ข้ายิ่งล้างผลาญ ยิ่งครองใจคน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2059",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/fab5fb52e35d9ba3afc1c15632272868.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สู่อ้อมกอดของกุหลาบ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2058",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/409ac46a7c40273ca30b2db7d9618a06.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "นางฟ้าน้อยชี้ทางรวย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2054",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/47f661c5189d94f7beb51ffdb4610a29.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "จากคนงานเหมืองไร้ค่า สู่ผู้ครองโกลันทิส",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2053",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f40b7beb921568e3857281b3959425e6.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สุดทางรักต้องห้าม",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2052",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e6af896e8ceedd531e930b2edc91025f.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เคมีแรงหลังเบาะ2",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2050",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f7687f859ec08d8fb6299289c681e21a.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ศิษย์น้องสุนัขขวัญใจ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2049",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/8b17917e1c8ccaca5146bc75938cc65d.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ราชินีกุหลาบดำ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2048",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/8db4b6eafefa56e21f626a45384a0850.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เจ้าสาวตัวแทนของราชาอสูร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2047",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/38f7f058a8b150b80599d8f155342bca.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "หลังคืนรักสู่เด็กเอ็มไอที",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2044",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/61accb06c635124bb6459d0b4bdc8e41.png",
@@ -1101,6 +1493,22 @@
           "playInNatPlayer": "true"
         },
         {
+          "name": "ปราบพยศสามอสูรขาโหด",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2029",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/00cde8be323615413977e619aa2bce41.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พันธะรักอัลฟ่า พี่ชายของคู่หมั้น",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2028",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/217aa65a94e149ba8b5445305d5c5ede.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "รักเหนือเผ่าพันธุ์",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2027",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6b3b7b306bb347121b5c493f8a5fa063.webp",
@@ -1117,6 +1525,14 @@
           "playInNatPlayer": "true"
         },
         {
+          "name": "เด็กเลี้ยงม้าคือตำนาน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2024",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/15e414f717228a541aa6fdad3f43eb87.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "ลูกหมาป่าในเงาจันทร์อัลฟ่า",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2023",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/2e7a98441feb3b1c7bf42b5f498322f2.png",
@@ -1125,9 +1541,17 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "ครั้งนี้ผมเลิกเมีย",
+          "name": "ครั้งนี้ผมเลือกเมีย",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2022",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e6d742bd61f2b78f481165207c12cf6d.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "จากกันเพราะรัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2021",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d3a466d7e427d991fd9e415f91a35e58.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -1200,6 +1624,14 @@
           "name": "พี่เลี้ยงมนุษย์ของสามอัลฟ่า",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1994",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/bdcb27e65a2d00eb7c1cd257f4011a08.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "รักนี้ยังไม่สายเกินไป",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1993",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d8ed504d0750393ffd813635fc952b2a.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -1352,14 +1784,6 @@
           "name": "ราชินีแห่งสี่ราชัน",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1944",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/26754abed06d90edbec48c0641db0cbd.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "ปฏิเสธรักราชันมังกร",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1941",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ad63c0c45dc01bd972db04f5c1a79a5e.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -1653,9 +2077,17 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "หัวใจ ไม่เคยอยู่ในแผน",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1867",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/5ad42a09e9d842ea8640152c115feebe.webp",
+          "name": "รักสวยตามเวลา",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1871",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/bc8a083f89b26f267ec3fab2076e09b0.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ฮองเฮาเกิดใหม่ชิงบัลลังก์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1869",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/b18b145632376c516ba5097c83921543.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -1672,6 +2104,14 @@
           "name": "พรลิขิตของลูซิเฟอร์",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1863",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/9890c7887edd08d2fa11f88ca1a16021.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "มังกรศึกไร้พ่าย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1862",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/29dee8db526bf2e4ff8531688c43968e.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -2064,6 +2504,14 @@
           "name": "บังเอิญเจอ บังเอิญรัก",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1759",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f89878eb8ac036934163d2b243dc1a91.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สั่งสัตว์ทั้งปวง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1758",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/38aa85630890c81419db55113df37a86.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -6635,6 +7083,14 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "สัตวแพทย์ขั้นห้า กับเหล่าสามีอสูร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2057",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/a4450f0c605dfbce2e0722eef5bf13d6.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "สายใยรักภรรยาเก่า",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2045",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/af0b9153f697e9d45fc7e0a61138d5c7.png",
@@ -8799,41 +9255,65 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
-          "name": "ปราบพยศสามอสูรขาโหด",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2029",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/00cde8be323615413977e619aa2bce41.png",
+          "name": "เฉียวจมไม่สาย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2114",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/9e7d4bcd4ac2e59a3a8a9a083ba64593.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "พันธะรักอัลฟ่า พี่ชายของคู่หมั้น",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2028",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/217aa65a94e149ba8b5445305d5c5ede.png",
+          "name": "คลีโอพัตราราชินีแห่งทองคำ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2113",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/333716cb7ac5678b23673664e63c0aaf.jpg",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "เด็กเลี้ยงม้าคือตำนาน",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2024",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/15e414f717228a541aa6fdad3f43eb87.png",
+          "name": "ยามหิมะโปรยปรายสายใยหวนคืน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2106",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d01fa2000e2963f254c588fee4916c44.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "จากกันเพราะรัก",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2021",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d3a466d7e427d991fd9e415f91a35e58.png",
+          "name": "บ่วงรักร้าย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2084",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/cb152b0971cde3b964df8ccc0ccbec33.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "ยอดกระบี่ซ่อนคม",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2020",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/58dbf0b945c90b48caa78114db066f5c.png",
+          "name": "เบาะหลังซ่อนรัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2082",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/87f01c38e7ca6eeafe1125d714874fd1.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "แต่งงานกับราชามังกรที่ซ่อน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2081",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f1363c7b9ad4b31721c50149627e4d8c.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "วาสนาที่หวนคืน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2078",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/007f7a5a8c31211ecafafd2ccd481a3f.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เธอคือหวานใจของฉัน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2075",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d5ea4e0b9aa17dcd207e092862475076.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -8847,25 +9327,9 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "ลูกลับพ่อใจจดกับนมขวด",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2012",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e709e9f91335bf309d0edcc6aeff3008.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
           "name": "อัปไซซ์มหาเศรษฐี",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1998",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ddfbb0848aa86bdcc8cf875b8708691a.png",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "รักนี้ยังไม่สายเกินไป",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1993",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d8ed504d0750393ffd813635fc952b2a.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -8921,7 +9385,7 @@
         {
           "name": "เสพติดกลิ่นรักพี่เลี้ยง",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1978",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d446281bb713cccbe4d3d099d513a62b.png",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/1522475408170851d909aa9d6ded8e4a.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -8983,41 +9447,9 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "แผนพลิกชะตาคุณชายไร้ค่า",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1877",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/28e4b71bf631c6e3482599c356e1fdbc.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
           "name": "เลห์รักแพรรี",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1872",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d620ae68efcce77a091415bb376a642b.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "รักสวยตามเวลา",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1871",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/bc8a083f89b26f267ec3fab2076e09b0.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "ฮองเฮาเกิดใหม่ชิงบัลลังก์",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1869",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/b18b145632376c516ba5097c83921543.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "มังกรศึกไร้พ่าย",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1862",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/29dee8db526bf2e4ff8531688c43968e.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -9029,49 +9461,49 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
-          "name": "ภูตแห่งตะเกียงวิเศษ",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2014",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/5061352b205a0867dace100f0ea6fd9f.png",
+          "name": "อวสานรักด้วยมือเธอ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2127",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e5b2b60276c1f8b1ee6ab9d49c0a53d6.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "คุณชายมารต่างโลก",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1861",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/edf81b8386b813096fb3407269d5eacc.webp",
+          "name": "อย่ามายุ่งกับข้าข้าแค่อยากเก็บตัว",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2116",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6d677595b6c106c25f4f6cd1e72670d2.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "เซียนทองลงเขา",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1846",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/89592025f88553b98c928112959592de.webp",
+          "name": "ตาบอดแล้วไงสัตว์คู่ใจข้าคือเทพ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2070",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6ff51d59597d82019195b550547edab9.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "พลิกเกมแค้นด้วยตาทิพย์",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1821",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f13948c43964974f506e9ad32e9df49c.webp",
+          "name": "มือปราบศัตรูพิฆาต",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2066",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ad9b3f101225c29817839e0d97c540ca.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "สั่งสัตว์ทั้งปวง",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1758",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/38aa85630890c81419db55113df37a86.webp",
+          "name": "ทายาทแม่มดผู้หวนคืน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1969",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/627271f1cccbee15de77bf3bd434eeb7.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
         },
         {
-          "name": "ชีวิตกะดึกในพิพิธภัณฑ์",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1664",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/244f5a30fca4045143c4677ce669d6f8.webp",
+          "name": "ปฏิเสธรักราชันมังกร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1941",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ad63c0c45dc01bd972db04f5c1a79a5e.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -9729,6 +10161,102 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "คฤหาสน์ชิงชัง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2133",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/9a23b66919fb040d7d403f48ca0d91b8.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พี่ชายผมคือเจ้าพ่อ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2115",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/a383592e94c48754d6770bc404dfed57.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สายฟ้าไร้รัก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2101",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d5a3bd7b5449c23a19effe4d32cf0ce8.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ความลับศาสตราจารย์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2098",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/4c0d30bdab3c271fd9324ed710276b7f.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เมื่อเจ้าพ่อทิ้งฉันฉันจึงกลายเป็นราชินีมาเฟีย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2091",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/da65671bf7c845acd1f590403f24aa5e.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "หยิ่งผยองบนฟ้า สยบราบคาบบนพื้นดิน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2087",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/cd02c74ff39e2681f65ecb931b8d4381.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "หวนคืนชะตาชายามังกร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2086",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/b022ebae91588f34cd803bea7f177acc.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พรานอสูรคืนถิ่น",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2068",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/8de67e8d3c3165318714c04b544e1ad7.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "อันตรายเธอบ้าของจริง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2063",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/63a348b6871058d991dad8fc65cd32b8.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เจ้าพ่อช่างยนต์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2060",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f4e7104806a57aada8c6ef2aaaf781fd.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ซีอีโอผู้ไม่ลืมบุญคุณ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2056",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/e7ab303839b16cd22cdd6920777e56b5.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พี่สาว109คนกับศึกนักเลงโรงเรียน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2055",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/d43e72bf7193891f6db171b28fc51cae.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "แพะบาปของบ้านแบลร์",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2034",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f66552117a1fca0d630970a74582d479.png",
@@ -9740,14 +10268,6 @@
           "name": "สลับรักสลับชีวิต",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1997",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ce101a23b5f86eeed745421a279813a6.png",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
-          "name": "ทายาทแม่มดผู้หวนคืน",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1969",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/c7bc68a1852841a3b3db0146f947f18a.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -9820,6 +10340,14 @@
           "name": "ฉันลาออก บริษัทก็เจ๊ง",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1778",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/566f7348605737448d35313ef8435732.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ชีวิตกะดึกในพิพิธภัณฑ์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1664",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/244f5a30fca4045143c4677ce669d6f8.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -11183,6 +11711,14 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "หงส์คู่หวนคืนกลางม่านวสันต์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2109",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/44c5a1d7d9dc813d26df8ea041919a11.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "ทะลุมิติพร้อมโกดัง",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2035",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/8fc077f0d2276e1d1f3a9697fecb1d6b.png",
@@ -11234,6 +11770,14 @@
           "name": "คู่บัลลังก์",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1901",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/2a4b5a8931961ccf2a726e9d2ef3e08d.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "แผนพลิกชะตาคุณชายไร้ค่า",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1877",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/28e4b71bf631c6e3482599c356e1fdbc.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -13337,6 +13881,78 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "เซียนฟืนผ่าพิภพ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2135",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/191bb1397a46a8e18f6622caaca66763.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ภรรยาพลังเทพ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2123",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/9c9eceefb335b92f0f46f681fb30cbad.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "บรรพชนร้อยปีฟื้นจากโลงสะท้านปฐพี",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2120",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/846cce18a3bd28a76b5cb90b39fc6fb4.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "อย่ายุ่งศิษย์น้อง",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2108",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/36217c69cf15fc01cc433ae723af81cc.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "คุณหนูตัวแสบกลายเป็นรักแท้ในโลกอสูร",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2107",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/4b28b76bb1c52fc0b53fe2201bac806d.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พี่สาวผมไร้เทียมทาน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2104",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/bc4db351957864648aa557fdbbd2c2da.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พลังเทพซ่อนกาย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2100",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/eb6d90afff4cb227096c54767c34f258.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "โชคหล่นทับเทพตัวน้อย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2079",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/aeee19c784cb222c6f928824e0e84444.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "นางพญาเหนือหล้า",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2071",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/0c722d88b46e4db6484ad1904de7779f.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "ราชันหมาป่าคืนบัลลังก์",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2005",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/6dfe08773239ec92efddb67d85c1a38e.png",
@@ -13433,9 +14049,25 @@
           "playInNatPlayer": "true"
         },
         {
+          "name": "คุณชายมารต่างโลก",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1861",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/edf81b8386b813096fb3407269d5eacc.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "ความเสียใจ ของเทพสงคราม",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1854",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7cc4ac45abf6c756f9fbc01309a84e49.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "เซียนทองลงเขา",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1846",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/89592025f88553b98c928112959592de.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -13999,6 +14631,38 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "คำสาบานที่แตกสลาย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2125",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/30bdefdf0fc826ad069a23f21cd76f8d.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "สวมรอยล้างทุจริต",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2112",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/8efb904306a4ba610cf4a9acf557c7ba.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "อสูรเลือดทรยศ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2085",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/90739988b5de76ade4995e495afa3a52.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ไล่กาฝากออกจากบ้าน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2046",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/7254ff956f92265744b1d33b37fb9a6a.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "เมื่อทายาทสาวเอาคืน",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2043",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/c616cf4a9fbecd85d6a709110313b88b.png",
@@ -14010,6 +14674,14 @@
           "name": "ยอดดวงใจท่านประธาน",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2030",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/1ea3de4f6fc079578225c90e803e40c2.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ยอดกระบี่ซ่อนคม",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2020",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/58dbf0b945c90b48caa78114db066f5c.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -14087,14 +14759,6 @@
           "playInNatPlayer": "true"
         },
         {
-          "name": "เคยถูกทิ้งแต่วันนี้ครองบัลลังก์",
-          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1900",
-          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/90d484af8f6b5c780af12683e36ab260.webp",
-          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
-          "info": "พากย์ไทย",
-          "playInNatPlayer": "true"
-        },
-        {
           "name": "แผนรักเกมร้าย",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1899",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/79fb5bf0251dc3ccae28aff8088287ef.webp",
@@ -14138,6 +14802,14 @@
           "name": "เมื่อฉันประประกาศหย่า",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1823",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/1dcc5b3267ac1114ce6c44041cc8d1fa.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "พลิกเกมแค้นด้วยตาทิพย์",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=1821",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/f13948c43964974f506e9ad32e9df49c.webp",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
@@ -15229,6 +15901,30 @@
       "image": "https://www.xn--72c9ab1ec1bc6q.online/assets/images/icon.webp",
       "stations": [
         {
+          "name": "มงกุฎที่แตกสลาย",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2128",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/37a71e4f9e75ec5d0214e014f66c7569.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "นักกำจัดขยะครัวเรือน",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2124",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/ab28255fe25a40f0575d1fbf769649b7.webp",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ตื่นพลังเทพอัสนี",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2099",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/584ead5a11ee4d227139633fc01d4295.png",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
           "name": "เทพสงครามคืนสนาม",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2041",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/c070186e10d863f1ad76d6bbc9b69448.png",
@@ -15240,6 +15936,14 @@
           "name": "สัญญาทหารผ่านศึก",
           "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2036",
           "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/050054d3bcfdb105f90589ba6b72593a.jpg",
+          "referer": "https://www.xn--72c9ab1ec1bc6q.online",
+          "info": "พากย์ไทย",
+          "playInNatPlayer": "true"
+        },
+        {
+          "name": "ภูตแห่งตะเกียงวิเศษ",
+          "url": "https://www.xn--72c9ab1ec1bc6q.online/movie-article.php?id=2014",
+          "image": "https://www.xn--72c9ab1ec1bc6q.online/uploads/posters/5061352b205a0867dace100f0ea6fd9f.png",
           "referer": "https://www.xn--72c9ab1ec1bc6q.online",
           "info": "พากย์ไทย",
           "playInNatPlayer": "true"
